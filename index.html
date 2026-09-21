@@ -1274,7 +1274,9 @@ html{scrollbar-width:thin;scrollbar-color:rgba(255,213,30,.5) rgba(11,7,38,.14);
 }
 .pm-thumbs[hidden]{display:none;}
 .pm-thumb{
-  flex:1;min-width:0;aspect-ratio:1/1;padding:.25rem;background:#fff;
+  /* capped so a two-shot strip does not balloon to half the stage width -
+     thumbnails stay the same size whatever the product's photo count */
+  flex:1 1 0;min-width:0;max-width:112px;aspect-ratio:1/1;padding:.25rem;background:#fff;
   border:2px solid rgba(26,26,46,.12);border-radius:12px;overflow:hidden;cursor:pointer;
   transition:border-color .3s ease,transform .3s var(--ease);
 }
@@ -1881,6 +1883,29 @@ body.modal-open{overflow:hidden;}
           <span class="p-cat">Cooking Ranges</span>
           <h3><button type="button" class="p-open">Two-Burner Gas Wok Range</button></h3>
           <p>Stainless steel double wok range with cast iron burner rings, a centre water well and a built-in tap over it.</p>
+          <div class="p-foot">
+            <span class="p-price">Price on request<small>contact us for a quotation</small></span>
+            <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ------------------------------------------------------------------
+           LK-TE-630. Holding copy again - swap the <p> and data-specs pairs
+           when the real wording arrives.
+           ------------------------------------------------------------------ -->
+      <article class="product-card reveal" data-sku="LK-TE-630" data-lead="Available on request" data-specs="Configuration::Single gas burner|Body::Stainless steel with rear splashback|Burner::Cast iron high-pressure wok ring|Water::Swan-neck tap over the wok well|Controls::Front-mounted gas valve and air regulator|Legs::Adjustable stainless steel, floor standing" data-category="cooking" data-images="assets/products/lk-te-630-1.jpeg::Layaan LK-TE-630 single-burner stainless steel gas wok range, three-quarter view|assets/products/lk-te-630-2.jpeg::Close-up of the LK-TE-630 cast iron wok burner ring">
+        <div class="p-media p-media--photo">
+          <span class="p-badge">LK-TE-630</span>
+          <div class="p-media-inner">
+            <img src="assets/products/lk-te-630-1.jpeg" width="1054" height="1280" loading="lazy" decoding="async"
+                 alt="Layaan LK-TE-630 single-burner stainless steel gas wok range, three-quarter view">
+          </div>
+        </div>
+        <div class="p-body">
+          <span class="p-cat">Cooking Ranges</span>
+          <h3><button type="button" class="p-open">Single-Burner Gas Wok Range</button></h3>
+          <p>Single wok station in stainless steel with a cast iron burner ring, rear splashback and a swan-neck filling tap.</p>
           <div class="p-foot">
             <span class="p-price">Price on request<small>contact us for a quotation</small></span>
             <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
