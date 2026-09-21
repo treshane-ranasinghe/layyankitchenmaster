@@ -1718,6 +1718,7 @@ body.modal-open{overflow:hidden;}
     <div class="filter-bar reveal" role="group" aria-label="Filter products by category">
       <button class="filter-btn" aria-pressed="true" aria-controls="productGrid" data-filter="all">All</button>
       <button class="filter-btn" aria-pressed="false" aria-controls="productGrid" data-filter="cooking">Cooking Ranges</button>
+      <button class="filter-btn" aria-pressed="false" aria-controls="productGrid" data-filter="machines">Cooking Machines</button>
     </div>
 
     <div class="product-grid" id="productGrid" data-stagger role="region" aria-label="Product catalogue" aria-live="polite">
@@ -1817,6 +1818,31 @@ body.modal-open{overflow:hidden;}
         </div>
       </article>
 
+      <!-- ------------------------------------------------------------------
+           LK-TE-DRG-300. Holding copy again - swap the <p> and data-specs
+           pairs when the real wording arrives. Only one photograph supplied
+           so far; add the second to data-images and the thumbnail strip
+           appears on its own.
+           ------------------------------------------------------------------ -->
+      <article class="product-card reveal" data-sku="LK-TE-DRG-300" data-lead="Available on request" data-specs="Configuration::Single rotating cooking drum|Body::Stainless steel on four adjustable feet|Drum::Coated interior with internal stirring fins|Controls::Digital panel with dial controls|Handle::Side lever tips the drum for serving and cleaning|Suits::Fried rice, curries and other batch cooking" data-category="machines" data-images="assets/products/lk-te-drg-300-1.jpeg::Layaan LK-TE-DRG-300 automatic drum wok cooker with digital control panel">
+        <div class="p-media p-media--photo">
+          <span class="p-badge">LK-TE-DRG-300</span>
+          <div class="p-media-inner">
+            <img src="assets/products/lk-te-drg-300-1.jpeg" width="455" height="500" loading="lazy" decoding="async"
+                 alt="Layaan LK-TE-DRG-300 automatic drum wok cooker with digital control panel">
+          </div>
+        </div>
+        <div class="p-body">
+          <span class="p-cat">Cooking Machines</span>
+          <h3><button type="button" class="p-open">Automatic Drum Wok Cooker</button></h3>
+          <p>Rotating drum cooker with internal stirring fins and a digital control panel, for fried rice, curries and batch work.</p>
+          <div class="p-foot">
+            <span class="p-price">Price on request<small>contact us for a quotation</small></span>
+            <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
+          </div>
+        </div>
+      </article>
+
     </div>
 
     <p class="p-empty" id="productEmpty">No products in this category yet &mdash; talk to our team and we will source it for you.</p>
@@ -1900,6 +1926,7 @@ body.modal-open{overflow:hidden;}
               <select id="qCategory" name="category">
                 <option>Multiple / not sure yet</option>
                 <option>Cooking Ranges</option>
+                <option>Cooking Machines</option>
                 <option>Other equipment</option>
               </select>
             </p>
@@ -1972,6 +1999,7 @@ body.modal-open{overflow:hidden;}
         <h4>Product Categories</h4>
         <ul class="footer-list">
           <li><a href="#products" data-jump="cooking">Cooking Ranges</a></li>
+          <li><a href="#products" data-jump="machines">Cooking Machines</a></li>
         </ul>
       </div>
 
