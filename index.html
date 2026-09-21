@@ -531,6 +531,9 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 12px);}
 .g4{background:linear-gradient(140deg,var(--accent-gold),var(--gold));}
 .g5{background:linear-gradient(140deg,var(--green),var(--yellow));}
 .g6{background:linear-gradient(140deg,var(--gold),var(--lime));}
+/* display:block, not the grid the emoji tiles use: a centred grid item leaves
+   height:100% cyclic, so the photo overflows the frame instead of fitting it. */
+.p-media-inner img{width:100%;height:100%;object-fit:contain;display:block;}
 .p-badge{
   position:absolute;top:.75rem;left:.75rem;z-index:2;
   background:var(--lime);color:#1A1A2E;
@@ -803,6 +806,13 @@ h2{letter-spacing:-.025em;}
   background:linear-gradient(180deg,rgba(11,7,38,0) 55%,rgba(11,7,38,.35) 100%);
   box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);
 }
+/* Studio shots arrive on a white backdrop, so the photo frame goes light and
+   drops the two touches built for the emoji tiles: the frosted disc behind the
+   glyph and the dark scrim along the bottom edge. */
+.p-media--photo{background:#fff;}
+.p-media--photo .p-media-inner{display:block;padding:.55rem;}
+.p-media--photo .p-media-inner::before{display:none;}
+.p-media--photo::after{background:none;box-shadow:inset 0 0 0 1px rgba(26,26,46,.1);}
 .g1{background:var(--grad-a);}
 .g2{background:var(--grad-b);}
 .g3{background:var(--grad-e);}
@@ -1250,9 +1260,27 @@ html{scrollbar-width:thin;scrollbar-color:rgba(255,213,30,.5) rgba(11,7,38,.14);
   transition:transform .3s var(--ease),background-color .3s ease;
 }
 .pm-close:hover{background:var(--hot-pink);transform:scale(1.08);}
-.pm-media{position:relative;overflow:hidden;min-height:300px;}
+.pm-media{position:relative;display:flex;flex-direction:column;overflow:hidden;min-height:300px;}
+.pm-stage{position:relative;flex:1;min-height:0;overflow:hidden;}
 .pm-media .p-media-inner{font-size:clamp(3.4rem,6vw,4.8rem);}
 .pm-media .p-badge{top:1rem;left:1rem;}
+.pm-media--photo{background:#fff;}
+.pm-media--photo .p-media-inner{display:block;padding:1rem;}
+.pm-media--photo .p-media-inner::before{display:none;}
+.pm-media--photo .p-media-inner{padding:1rem;}
+.pm-thumbs{
+  display:flex;gap:.5rem;padding:.6rem;background:#fff;
+  border-top:1px solid var(--hairline-light);
+}
+.pm-thumbs[hidden]{display:none;}
+.pm-thumb{
+  flex:1;min-width:0;aspect-ratio:1/1;padding:.25rem;background:#fff;
+  border:2px solid rgba(26,26,46,.12);border-radius:12px;overflow:hidden;cursor:pointer;
+  transition:border-color .3s ease,transform .3s var(--ease);
+}
+.pm-thumb:hover{transform:translateY(-2px);border-color:rgba(171,3,169,.45);}
+.pm-thumb[aria-pressed="true"]{border-color:var(--magenta);}
+.pm-thumb:focus-visible{outline:3px solid var(--accent-gold);outline-offset:2px;}
 .pm-body{padding:clamp(1.6rem,3vw,2.5rem);display:flex;flex-direction:column;}
 .pm-body h3{font-size:clamp(1.3rem,1.05rem + 1vw,1.75rem);color:var(--ink);margin:.15rem 0 .6rem;}
 .pm-body .p-cat{margin-bottom:.2rem;}
@@ -1279,7 +1307,8 @@ body.modal-open{overflow:hidden;}
     grid-template-columns:1fr;width:100%;max-height:92vh;
     border-radius:20px 20px 0 0;transform:translateY(40px);
   }
-  .pm-media{min-height:0;aspect-ratio:16/10;}
+  .pm-media{min-height:0;}
+  .pm-stage{aspect-ratio:16/10;}
   .pm-foot{flex-direction:column;align-items:stretch;}
   .pm-foot .btn{width:100%;}
 }
@@ -1829,167 +1858,31 @@ body.modal-open{overflow:hidden;}
 
     <div class="filter-bar reveal" role="group" aria-label="Filter products by category">
       <button class="filter-btn" aria-pressed="true" aria-controls="productGrid" data-filter="all">All</button>
-      <button class="filter-btn" aria-pressed="false" aria-controls="productGrid" data-filter="thermometers">Thermometers &amp; Monitoring</button>
-      <button class="filter-btn" aria-pressed="false" aria-controls="productGrid" data-filter="storage">Storage &amp; Shelving</button>
-      <button class="filter-btn" aria-pressed="false" aria-controls="productGrid" data-filter="cleaning">Cleaning &amp; Sanitation</button>
-      <button class="filter-btn" aria-pressed="false" aria-controls="productGrid" data-filter="ppe">PPE &amp; Safety Wear</button>
-      <button class="filter-btn" aria-pressed="false" aria-controls="productGrid" data-filter="labeling">Labeling &amp; Dating</button>
-      <button class="filter-btn" aria-pressed="false" aria-controls="productGrid" data-filter="fire">Fire Safety</button>
+      <button class="filter-btn" aria-pressed="false" aria-controls="productGrid" data-filter="cooking">Cooking Ranges</button>
     </div>
 
     <div class="product-grid" id="productGrid" data-stagger role="region" aria-label="Product catalogue" aria-live="polite">
 
-      <article class="product-card reveal" data-sku="KG-TH-101" data-lead="In stock &middot; 24hr Colombo dispatch" data-specs="Measuring range::-50&deg;C to +300&deg;C|Accuracy::&plusmn;0.5&deg;C|Response time::2 seconds|Protection::IP66 washdown rated|Probe::110mm reduced-tip stainless|Supplied with::Signed calibration certificate" data-category="thermometers">
-        <div class="p-media"><span class="p-badge">NSF Certified</span><div class="p-media-inner g1" aria-hidden="true">&#127777;</div></div>
-        <div class="p-body">
-          <span class="p-cat">Thermometers &amp; Monitoring</span>
-          <h3><button type="button" class="p-open">Digital Probe Thermometer Pro</button></h3>
-          <p>2-second read, IP66 waterproof body, supplied with a signed calibration certificate.</p>
-          <div class="p-foot">
-            <span class="p-price">LKR 8,500<small>per unit, excl. VAT</small></span>
-            <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
+      <!-- ------------------------------------------------------------------
+           LK-TE-1500. The copy below is a holding description written from
+           the photographs - swap the <p> and the data-specs pairs for the
+           real wording and figures when they come through.
+           data-images is "path::alt text" per shot, separated by |.
+           ------------------------------------------------------------------ -->
+      <article class="product-card reveal" data-sku="LK-TE-1500" data-lead="Available on request" data-specs="Configuration::2 gas burners with centre water well|Body::Stainless steel with rear splashback|Burners::Cast iron high-pressure wok rings|Water::Built-in swivel tap over the centre well|Controls::Front-mounted gas and air valves|Legs::Adjustable stainless steel, floor standing" data-category="cooking" data-images="assets/products/lk-te-1500-1.jpeg::Layaan LK-TE-1500 two-burner stainless steel gas wok range, three-quarter view|assets/products/lk-te-1500-2.jpeg::Top view of the LK-TE-1500 showing both wok burners and the centre water well|assets/products/lk-te-1500-3.jpeg::Close-up of the LK-TE-1500 cast iron wok burner ring">
+        <div class="p-media p-media--photo">
+          <span class="p-badge">LK-TE-1500</span>
+          <div class="p-media-inner">
+            <img src="assets/products/lk-te-1500-1.jpeg" width="1280" height="988" loading="lazy" decoding="async"
+                 alt="Layaan LK-TE-1500 two-burner stainless steel gas wok range, three-quarter view">
           </div>
         </div>
-      </article>
-
-      <article class="product-card reveal" data-sku="KG-TH-240" data-lead="In stock &middot; 24hr Colombo dispatch" data-specs="Measuring range::-40&deg;C to +85&deg;C|Logging interval::Every 5 minutes|History retained::12 months, CSV export|Alerts::SMS and email on excursion|Battery life::18 months typical|Supplied with::Wall bracket and glycol bottle" data-category="thermometers">
-        <div class="p-media"><span class="p-badge">HACCP</span><span class="p-tag-sale">Save 12%</span><div class="p-media-inner g2" aria-hidden="true">&#128225;</div></div>
         <div class="p-body">
-          <span class="p-cat">Thermometers &amp; Monitoring</span>
-          <h3><button type="button" class="p-open">Wireless Fridge &amp; Freezer Logger</button></h3>
-          <p>Continuous temperature logging with SMS alerts and exportable 12-month audit history.</p>
+          <span class="p-cat">Cooking Ranges</span>
+          <h3><button type="button" class="p-open">Two-Burner Gas Wok Range</button></h3>
+          <p>Stainless steel double wok range with cast iron burner rings, a centre water well and a built-in tap over it.</p>
           <div class="p-foot">
-            <span class="p-price">LKR 24,900<small>per unit, excl. VAT</small></span>
-            <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
-          </div>
-        </div>
-      </article>
-
-      <article class="product-card reveal" data-sku="KG-TH-160" data-lead="In stock &middot; 24hr Colombo dispatch" data-specs="Measuring range::-50&deg;C to +550&deg;C|Accuracy::&plusmn;1.5% of reading|Optics::12:1 distance-to-spot|Targeting::Dual laser|Emissivity::Adjustable 0.10&ndash;1.00|Use for::Receiving, hot holding, delivery checks" data-category="thermometers">
-        <div class="p-media"><span class="p-badge">NSF Certified</span><div class="p-media-inner g3" aria-hidden="true">&#128269;</div></div>
-        <div class="p-body">
-          <span class="p-cat">Thermometers &amp; Monitoring</span>
-          <h3><button type="button" class="p-open">Infrared Surface Thermometer</button></h3>
-          <p>Non-contact surface checks for receiving bays, hot holding and delivery verification.</p>
-          <div class="p-foot">
-            <span class="p-price">LKR 12,750<small>per unit, excl. VAT</small></span>
-            <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
-          </div>
-        </div>
-      </article>
-
-      <article class="product-card reveal" data-sku="KG-ST-410" data-lead="5&ndash;7 working days" data-specs="Material::304-grade stainless steel|Configuration::4 tiers, adjustable|Load rating::350kg per shelf|Dimensions::1800H x 1200W x 450D mm|Adjustment::25mm increments|Finish::Electropolished, corrosion resistant" data-category="storage">
-        <div class="p-media"><span class="p-badge">NSF Certified</span><div class="p-media-inner g4" aria-hidden="true">&#128230;</div></div>
-        <div class="p-body">
-          <span class="p-cat">Storage &amp; Shelving</span>
-          <h3><button type="button" class="p-open">Stainless Steel Wire Shelving Unit</button></h3>
-          <p>Four-tier 304-grade unit rated to 350kg per shelf, adjustable at 25mm increments.</p>
-          <div class="p-foot">
-            <span class="p-price">LKR 46,000<small>per bay, excl. VAT</small></span>
-            <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
-          </div>
-        </div>
-      </article>
-
-      <article class="product-card reveal" data-sku="KG-ST-212" data-lead="In stock &middot; 24hr Colombo dispatch" data-specs="Material::Polycarbonate, BPA-free|Set contents::4 x 2L, 4 x 4L, 4 x 6L|Temperature range::-40&deg;C to +100&deg;C|Lids::Moulded date panel, airtight|Dishwasher::Safe to 100&deg;C|Stacking::Interlocking bases" data-category="storage">
-        <div class="p-media"><span class="p-badge">HACCP</span><div class="p-media-inner g5" aria-hidden="true">&#129377;</div></div>
-        <div class="p-body">
-          <span class="p-cat">Storage &amp; Shelving</span>
-          <h3><button type="button" class="p-open">Food-Grade Container Set (12 pc)</button></h3>
-          <p>Polycarbonate, date-panel moulded lids, stackable and dishwasher safe to 100&deg;C.</p>
-          <div class="p-foot">
-            <span class="p-price">LKR 15,200<small>per set, excl. VAT</small></span>
-            <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
-          </div>
-        </div>
-      </article>
-
-      <article class="product-card reveal" data-sku="KG-ST-306" data-lead="In stock &middot; 24hr Colombo dispatch" data-specs="Set contents::6 HDPE boards + wall rack|Board size::450 x 300 x 12mm|Colour system::HACCP zone separation|Surface::Non-porous, knife friendly|Cleaning::Dishwasher safe|Fixes::Cross-contamination audit findings" data-category="storage">
-        <div class="p-media"><span class="p-badge">NSF Certified</span><div class="p-media-inner g6" aria-hidden="true">&#128298;</div></div>
-        <div class="p-body">
-          <span class="p-cat">Storage &amp; Shelving</span>
-          <h3><button type="button" class="p-open">Colour-Coded Cutting Board Rack</button></h3>
-          <p>Six-board system with wall rack &mdash; the fastest fix for cross-contamination findings.</p>
-          <div class="p-foot">
-            <span class="p-price">LKR 9,800<small>per set, excl. VAT</small></span>
-            <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
-          </div>
-        </div>
-      </article>
-
-      <article class="product-card reveal" data-sku="KG-CL-505" data-lead="In stock &middot; 24hr Colombo dispatch" data-specs="Chemistry::Quaternary ammonium, no-rinse|Dilution::1:100 for food contact|Contact time::60 seconds|Coverage::Up to 500L made up|Supplied with::MSDS and dilution wall chart|Traceability::Batch-coded for audit" data-category="cleaning">
-        <div class="p-media"><span class="p-badge">HACCP</span><div class="p-media-inner g1" aria-hidden="true">&#129380;</div></div>
-        <div class="p-body">
-          <span class="p-cat">Cleaning &amp; Sanitation</span>
-          <h3><button type="button" class="p-open">Food-Safe Sanitiser Concentrate 5L</button></h3>
-          <p>No-rinse quaternary formula with batch-traceable MSDS and dilution wall chart.</p>
-          <div class="p-foot">
-            <span class="p-price">LKR 6,400<small>per 5L, excl. VAT</small></span>
-            <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
-          </div>
-        </div>
-      </article>
-
-      <article class="product-card reveal" data-sku="KG-CL-440" data-lead="5&ndash;7 working days" data-specs="Zones::Red, blue, green and yellow|Kit contents::Mops, buckets, brushes, squeegees|Station::Wall-mounted shadow board|Handles::Colour-matched, food-safe|Purpose::Prevents cross-zone contamination" data-category="cleaning">
-        <div class="p-media"><span class="p-badge">NSF Certified</span><span class="p-tag-sale">Bundle</span><div class="p-media-inner g2" aria-hidden="true">&#129529;</div></div>
-        <div class="p-body">
-          <span class="p-cat">Cleaning &amp; Sanitation</span>
-          <h3><button type="button" class="p-open">Colour-Coded Cleaning Kit</button></h3>
-          <p>Zone-separated mops, buckets and brushes in four colours with a wall-mount station.</p>
-          <div class="p-foot">
-            <span class="p-price">LKR 18,300<small>per kit, excl. VAT</small></span>
-            <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
-          </div>
-        </div>
-      </article>
-
-      <article class="product-card reveal" data-sku="KG-PP-1000" data-lead="In stock &middot; 24hr Colombo dispatch" data-specs="Material::Nitrile, powder-free|Case quantity::1,000 gloves (10 boxes)|Colour::Blue for visual detection|Sizes::S, M, L, XL|Quality level::AQL 1.5|Approval::Food-contact certified" data-category="ppe">
-        <div class="p-media"><span class="p-badge">HACCP</span><div class="p-media-inner g3" aria-hidden="true">&#129508;</div></div>
-        <div class="p-body">
-          <span class="p-cat">PPE &amp; Safety Wear</span>
-          <h3><button type="button" class="p-open">Nitrile Food-Handling Gloves</button></h3>
-          <p>Powder-free, blue for visual detection, food-contact approved. Case of 1,000.</p>
-          <div class="p-foot">
-            <span class="p-price">LKR 11,950<small>per case, excl. VAT</small></span>
-            <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
-          </div>
-        </div>
-      </article>
-
-      <article class="product-card reveal" data-sku="KG-PP-520" data-lead="5&ndash;7 working days" data-specs="Protection level::EN388 Level A5 cut resistance|Set contents::Glove pair + chainmail-lined apron|Sizes::M, L, XL|Washing::Machine washable at 60&deg;C|Use for::Butchery, portioning and prep lines" data-category="ppe">
-        <div class="p-media"><span class="p-badge">NSF Certified</span><div class="p-media-inner g4" aria-hidden="true">&#129822;</div></div>
-        <div class="p-body">
-          <span class="p-cat">PPE &amp; Safety Wear</span>
-          <h3><button type="button" class="p-open">Cut-Resistant Glove &amp; Apron Set</button></h3>
-          <p>Level A5 cut protection for butchery and prep lines, machine washable at 60&deg;C.</p>
-          <div class="p-foot">
-            <span class="p-price">LKR 13,400<small>per set, excl. VAT</small></span>
-            <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
-          </div>
-        </div>
-      </article>
-
-      <article class="product-card reveal" data-sku="KG-LB-700" data-lead="In stock &middot; 24hr Colombo dispatch" data-specs="Roll pack::7 colours, one per day|Labels per roll::1,000|Label size::25mm diameter|Dissolve time::30 seconds in water|Residue::None &mdash; no scraping required|Adhesive::Food-safe, freezer rated" data-category="labeling">
-        <div class="p-media"><span class="p-badge">HACCP</span><div class="p-media-inner g5" aria-hidden="true">&#127991;</div></div>
-        <div class="p-body">
-          <span class="p-cat">Labeling &amp; Dating</span>
-          <h3><button type="button" class="p-open">Dissolvable Day-Dot Label Rolls</button></h3>
-          <p>Seven-colour day dots that dissolve in 30 seconds &mdash; no scraping, no residue.</p>
-          <div class="p-foot">
-            <span class="p-price">LKR 4,250<small>per roll pack, excl. VAT</small></span>
-            <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
-          </div>
-        </div>
-      </article>
-
-      <article class="product-card reveal" data-sku="KG-FS-610" data-lead="5&ndash;7 working days" data-specs="Capacity::6 litre wet chemical|Rating::Class K / F cooking oils|Discharge::Low-velocity misting lance|Supplied with::Wall mounting kit and service tag|Servicing::Annual service contract available|Required for::Deep fryer and range installations" data-category="fire">
-        <div class="p-media"><span class="p-badge">NSF Certified</span><div class="p-media-inner g6" aria-hidden="true">&#128293;</div></div>
-        <div class="p-body">
-          <span class="p-cat">Fire Safety</span>
-          <h3><button type="button" class="p-open">Class K Kitchen Fire Extinguisher</button></h3>
-          <p>Wet chemical unit for deep fryers, supplied with mounting kit and service tag.</p>
-          <div class="p-foot">
-            <span class="p-price">LKR 27,500<small>per unit, excl. VAT</small></span>
+            <span class="p-price">Price on request<small>contact us for a quotation</small></span>
             <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
           </div>
         </div>
@@ -2077,12 +1970,8 @@ body.modal-open{overflow:hidden;}
               <label for="qCategory">Product interest</label>
               <select id="qCategory" name="category">
                 <option>Multiple / not sure yet</option>
-                <option>Thermometers &amp; Monitoring</option>
-                <option>Storage &amp; Shelving</option>
-                <option>Cleaning &amp; Sanitation</option>
-                <option>PPE &amp; Safety Wear</option>
-                <option>Labeling &amp; Dating</option>
-                <option>Fire Safety</option>
+                <option>Cooking Ranges</option>
+                <option>Other equipment</option>
               </select>
             </p>
             <p class="field field--wide">
@@ -2153,12 +2042,7 @@ body.modal-open{overflow:hidden;}
       <div>
         <h4>Product Categories</h4>
         <ul class="footer-list">
-          <li><a href="#products" data-jump="thermometers">Thermometers &amp; Monitoring</a></li>
-          <li><a href="#products" data-jump="storage">Storage &amp; Shelving</a></li>
-          <li><a href="#products" data-jump="cleaning">Cleaning &amp; Sanitation</a></li>
-          <li><a href="#products" data-jump="ppe">PPE &amp; Safety Wear</a></li>
-          <li><a href="#products" data-jump="labeling">Labeling &amp; Dating</a></li>
-          <li><a href="#products" data-jump="fire">Fire Safety</a></li>
+          <li><a href="#products" data-jump="cooking">Cooking Ranges</a></li>
         </ul>
       </div>
 
@@ -2192,7 +2076,8 @@ body.modal-open{overflow:hidden;}
     <button type="button" class="pm-close" id="pmClose" aria-label="Close product details">&#10005;</button>
     <div class="pm-media">
       <span class="p-badge" id="pmBadge"></span>
-      <div class="p-media-inner g1" id="pmMedia" aria-hidden="true"></div>
+      <div class="pm-stage"><div class="p-media-inner g1" id="pmMedia" aria-hidden="true"></div></div>
+      <div class="pm-thumbs" id="pmThumbs" role="group" aria-label="Product images" hidden></div>
     </div>
     <div class="pm-body">
       <span class="p-cat" id="pmCat"></span>
@@ -2657,12 +2542,75 @@ body.modal-open{overflow:hidden;}
     var pmCta = document.getElementById('pmCta');
     var pmReturnTo = null;
 
-    function fillModal(card) {
-      var media = card.querySelector('.p-media-inner');
-      var gradient = (media.className.match(/\bg\d\b/) || ['g1'])[0];
+    // A card carries its photo set as "src::alt" pairs joined by "|".
+    // Without one it falls back to the emoji-on-gradient tile.
+    function parseShots(card) {
+      return (card.getAttribute('data-images') || '').split('|')
+        .filter(Boolean)
+        .map(function (entry) {
+          var bits = entry.split('::');
+          return { src: bits[0], alt: bits[1] || '' };
+        });
+    }
+
+    function buildGallery(card) {
       var pmMedia = document.getElementById('pmMedia');
-      pmMedia.className = 'p-media-inner ' + gradient;
-      pmMedia.textContent = media.textContent.trim();
+      var pmThumbs = document.getElementById('pmThumbs');
+      var shots = parseShots(card);
+
+      while (pmMedia.firstChild) { pmMedia.removeChild(pmMedia.firstChild); }
+      while (pmThumbs.firstChild) { pmThumbs.removeChild(pmThumbs.firstChild); }
+
+      if (!shots.length) {
+        var tile = card.querySelector('.p-media-inner');
+        var gradient = (tile.className.match(/\bg\d\b/) || ['g1'])[0];
+        pmMedia.className = 'p-media-inner ' + gradient;
+        pmMedia.setAttribute('aria-hidden', 'true');
+        pmMedia.textContent = tile.textContent.trim();
+        pmThumbs.parentNode.classList.remove('pm-media--photo');
+        pmThumbs.hidden = true;
+        return;
+      }
+
+      pmMedia.className = 'p-media-inner';
+      pmMedia.removeAttribute('aria-hidden');
+      pmThumbs.parentNode.classList.add('pm-media--photo');
+
+      var stage = document.createElement('img');
+      stage.decoding = 'async';
+      pmMedia.appendChild(stage);
+
+      var thumbs = shots.map(function (shot, index) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'pm-thumb';
+        btn.setAttribute('aria-pressed', 'false');
+        btn.setAttribute('aria-label', 'Show image ' + (index + 1) + ' of ' + shots.length);
+        var img = document.createElement('img');
+        img.src = shot.src;
+        img.alt = '';
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        btn.appendChild(img);
+        btn.addEventListener('click', function () { show(index); });
+        pmThumbs.appendChild(btn);
+        return btn;
+      });
+
+      function show(index) {
+        stage.src = shots[index].src;
+        stage.alt = shots[index].alt;
+        thumbs.forEach(function (btn, i) {
+          btn.setAttribute('aria-pressed', String(i === index));
+        });
+      }
+
+      pmThumbs.hidden = shots.length < 2;
+      show(0);
+    }
+
+    function fillModal(card) {
+      buildGallery(card);
 
       document.getElementById('pmBadge').textContent = card.querySelector('.p-badge').textContent;
       document.getElementById('pmCat').textContent = card.querySelector('.p-cat').textContent;
