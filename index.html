@@ -418,70 +418,6 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 12px);}
 .stat span{display:block;margin-top:.4rem;color:#fff;font-size:.9rem;letter-spacing:.04em;}
 
 /* ---------- 6. Company profile ---------- */
-.profile-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.62fr);gap:clamp(1.5rem,2.5vw,2.25rem);align-items:start;}
-.profile-card{
-  background:var(--card);border-radius:18px;box-shadow:var(--shadow-card);
-  overflow:hidden;border:1px solid rgba(80,3,192,.08);
-}
-.profile-card-head{
-  background:linear-gradient(115deg,var(--purple),var(--magenta));
-  color:#fff;padding:clamp(1.5rem,2.4vw,2rem) clamp(1.5rem,2.6vw,2.25rem);
-  display:flex;align-items:center;gap:1rem;flex-wrap:wrap;
-}
-.profile-card-head h3{color:#fff;margin:0;font-size:1.25rem;}
-.profile-card-head .tag{
-  margin-left:auto;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);
-  border-radius:var(--pill);padding:.35rem .9rem;font-size:.76rem;font-weight:600;
-  font-family:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;letter-spacing:.06em;text-transform:uppercase;
-}
-.profile-rows{padding:.5rem clamp(1.25rem,2.6vw,2.25rem) 1.5rem;}
-.profile-row{
-  display:grid;grid-template-columns:minmax(190px,.42fr) minmax(0,1fr);
-  gap:.5rem 1.5rem;align-items:baseline;
-  padding:1.05rem 0;border-bottom:1px dashed rgba(26,26,46,.12);
-  transition:background-color .3s ease;
-}
-.profile-row:last-child{border-bottom:0;}
-.profile-row:hover{background:rgba(255,213,30,.09);}
-.profile-row dt{
-  display:flex;align-items:center;gap:.65rem;
-  font-family:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;font-weight:600;font-size:.92rem;color:var(--purple);
-}
-.profile-row dd{margin:0;color:var(--muted-light);font-size:.97rem;}
-.profile-row dd b{color:var(--ink);font-weight:600;}
-.dot-ico{width:11px;height:11px;border-radius:50%;flex:none;box-shadow:0 0 0 4px rgba(0,0,0,.04);}
-.dot-1{background:var(--green);}.dot-2{background:var(--gold);}.dot-3{background:var(--pink);}
-.dot-4{background:var(--magenta);}.dot-5{background:var(--accent-gold);}.dot-6{background:var(--lime);}
-.dot-7{background:var(--purple);}.dot-8{background:var(--green);}
-.chip-list{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.15rem;}
-.chip{
-  font-size:.78rem;font-weight:600;font-family:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
-  padding:.3rem .75rem;border-radius:var(--pill);
-  background:rgba(255,213,30,.16);color:#5003C0;border:1px solid rgba(255,213,30,.35);
-}
-
-.profile-side{display:grid;gap:clamp(1.5rem,2.5vw,2.25rem);}
-.side-panel{
-  border-radius:18px;padding:clamp(1.6rem,2.4vw,2rem);color:#fff;
-  background:linear-gradient(150deg,var(--dark),var(--purple));
-  box-shadow:0 20px 44px rgba(80,3,192,.28);
-}
-.side-panel h3{color:#fff;}
-.side-panel p{color:rgba(255,255,255,.78);font-size:.95rem;}
-.side-list{display:grid;gap:.85rem;margin:1.3rem 0 0;}
-.side-list li{display:flex;gap:.75rem;align-items:flex-start;font-size:.94rem;color:rgba(255,255,255,.85);}
-.side-list .tick{
-  width:22px;height:22px;flex:none;border-radius:50%;background:var(--green);color:#1A1A2E;
-  display:grid;place-items:center;font-size:.72rem;font-weight:700;margin-top:.15rem;
-}
-.side-panel.light{
-  background:linear-gradient(150deg,var(--gold),var(--yellow));color:var(--ink);
-  box-shadow:0 20px 44px rgba(255,213,30,.32);
-}
-.side-panel.light h3{color:var(--ink);}
-.side-panel.light p{color:rgba(26,26,46,.78);}
-.side-panel.light .big{font-family:'Space Grotesk',system-ui,sans-serif;font-weight:700;font-size:clamp(2rem,4vw,2.6rem);line-height:1.1;}
-
 .values-head{margin:clamp(3.5rem,6vw,5.5rem) 0 clamp(2rem,3vw,2.75rem);text-align:center;}
 .value-card{text-align:left;transition:transform .4s var(--ease),box-shadow .4s ease;}
 .value-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-card-hover);}
@@ -599,8 +535,20 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 12px);}
 }
 .footer-list a:hover{color:var(--gold);transform:translateX(4px);}
 .footer-list .mini-dot{width:6px;height:6px;border-radius:50%;background:var(--green);flex:none;}
-.contact-list li{display:flex;gap:.75rem;margin-bottom:1rem;font-size:.93rem;line-height:1.55;}
-.contact-list .ci{font-size:1rem;flex:none;}
+.contact-list li{display:flex;gap:.8rem;margin-bottom:1.05rem;font-size:.93rem;line-height:1.55;align-items:flex-start;}
+/* line icons rather than emoji: they inherit colour, keep one visual
+   weight and stay crisp instead of rendering differently per platform */
+.contact-list .ci{
+  flex:none;width:32px;height:32px;border-radius:9px;display:grid;place-items:center;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);
+  color:var(--gold-accent);
+  transition:background-color .35s ease,border-color .35s ease,transform .35s var(--ease);
+}
+.contact-list .ci svg{
+  width:16px;height:16px;fill:none;stroke:currentColor;
+  stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;
+}
+.contact-list li > :last-child{padding-top:.25rem;}
 .contact-list b{
   display:block;font-size:.72rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
   color:rgba(255,255,255,.55);margin-bottom:.15rem;
@@ -769,21 +717,6 @@ h2{letter-spacing:-.025em;}
 .media-frame{border:1px solid rgba(255,255,255,.12);box-shadow:0 34px 76px rgba(80,3,192,.34);}
 .media-frame::after{background:radial-gradient(58% 48% at 26% 18%,rgba(255,213,30,.18),transparent 62%);}
 
-/* ---- Company profile ---- */
-.profile-card{border:1px solid var(--hairline-light);}
-.profile-row:hover{background:rgba(80,3,192,.04);}
-.chip{background:rgba(80,3,192,.06);color:var(--purple-deep);border:1px solid rgba(80,3,192,.2);}
-.dot-1{background:var(--gold-accent);}
-.dot-2{background:var(--hot-pink);}
-.dot-3{background:var(--magenta-purple);}
-.dot-4{background:var(--purple-deep);}
-.dot-5{background:var(--gold-accent);}
-.dot-6{background:var(--hot-pink);}
-.dot-7{background:var(--magenta-purple);}
-.dot-8{background:var(--purple-deep);}
-.side-list .tick{background:var(--gold-accent);color:#1A1A2E;}
-.side-panel.light{background:#FFD51E;color:var(--ink);box-shadow:0 22px 48px rgba(255,213,30,.26);}
-
 /* ---- Products ---- */
 .filter-btn{font-size:.84rem;letter-spacing:.02em;}
 .filter-btn[aria-pressed="true"]{
@@ -938,8 +871,6 @@ h2{letter-spacing:-.025em;}
   .grid-4{grid-template-columns:repeat(2,minmax(0,1fr));}
   .about-grid{grid-template-columns:1fr;}
   .media-frame{max-width:520px;margin-inline:auto;aspect-ratio:4/3;}
-  .profile-layout{grid-template-columns:1fr;}
-  .profile-side{grid-template-columns:repeat(2,minmax(0,1fr));}
   .product-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
   .footer-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
 
@@ -978,7 +909,7 @@ h2{letter-spacing:-.025em;}
   .navbar .brand-mark{height:52px;width:52px;}
   .filter-bar{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;}
   body{line-height:1.65;}
-  .grid-4,.grid-3,.product-grid,.profile-side,.footer-grid{grid-template-columns:1fr;}
+  .grid-4,.grid-3,.product-grid,.footer-grid{grid-template-columns:1fr;}
   .stats-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:1.75rem 1rem;}
   .stat:nth-child(odd) + .stat::before{top:8%;bottom:8%;}
   .stat:nth-child(odd)::before{display:none;}
@@ -986,8 +917,6 @@ h2{letter-spacing:-.025em;}
   .hero-meta{gap:1.25rem 1.75rem;}
   .hero-meta b{font-size:1.35rem;}
   .hero-actions .btn{width:100%;}
-  .profile-row{grid-template-columns:1fr;gap:.3rem;}
-  .profile-card-head .tag{margin-left:0;}
   .section-head{text-align:center;margin-inline:auto;}
   .underline-gold::after{left:50%;transform:translateX(-50%);}
   .footer-bottom{justify-content:center;text-align:center;}
@@ -1040,17 +969,14 @@ h2{letter-spacing:-.025em;}
   .p-badge,.p-tag-sale{transition:transform .35s var(--ease);}
 
   .card:hover h3{color:var(--magenta-purple);}
-  .chip:hover{background:rgba(80,3,192,.12);border-color:rgba(80,3,192,.4);}
-  .chip{transition:background-color .3s ease,border-color .3s ease;}
 
   .stat:hover b{transform:translateY(-3px);}
   .stat b{transition:transform .35s var(--ease);}
 
   .contact-list a:hover,.map-details a:hover{color:var(--gold-accent);text-decoration:underline;text-underline-offset:3px;}
+  .contact-list li:hover .ci{background:rgba(255,213,30,.14);border-color:rgba(255,213,30,.38);transform:translateY(-2px);}
   .map-shell:hover{box-shadow:0 2px 8px rgba(16,12,40,.06),0 28px 70px rgba(80,3,192,.26);}
   .map-shell{transition:box-shadow .45s var(--ease);}
-  .side-panel:hover{transform:translateY(-4px);}
-  .side-panel{transition:transform .4s var(--ease),box-shadow .4s ease;}
   .media-frame:hover img{transform:scale(1.06);}
   .media-frame img{transition:transform .45s var(--ease);}
   .utility-item:hover .u-ico{transform:scale(1.15);}
@@ -1703,75 +1629,6 @@ body.modal-open{overflow:hidden;}
     <div class="section-head reveal">
       <span class="eyebrow"><span class="eyebrow-num">03</span>At a glance</span>
       <h2 class="underline-gold">Company Profile</h2>
-      <p class="lead">The registered details, credentials and coverage that procurement teams and auditors ask for most.</p>
-    </div>
-
-    <div class="profile-layout">
-      <div class="profile-card reveal">
-        <div class="profile-card-head">
-          <h3>Corporate Fact Sheet</h3>
-          <span class="tag">Verified 2026</span>
-        </div>
-        <dl class="profile-rows">
-          <div class="profile-row">
-            <dt><span class="dot-ico dot-1" aria-hidden="true"></span> Company Name</dt>
-            <dd><b>Layaan Kitchen Masters</b></dd>
-          </div>
-          <div class="profile-row">
-            <dt><span class="dot-ico dot-2" aria-hidden="true"></span> Established</dt>
-            <dd><b>2011</b> &mdash; privately held, locally owned</dd>
-          </div>
-          <div class="profile-row">
-            <dt><span class="dot-ico dot-3" aria-hidden="true"></span> Head Office</dt>
-            <dd>No. 111/4, Thewatte Road, <b>Ragama, Sri Lanka</b></dd>
-          </div>
-          <div class="profile-row">
-            <dt><span class="dot-ico dot-4" aria-hidden="true"></span> Showroom</dt>
-            <dd>No. 265, Negombo Road, Dandugama, <b>Ja-Ela, Sri Lanka</b></dd>
-          </div>
-          <div class="profile-row">
-            <dt><span class="dot-ico dot-5" aria-hidden="true"></span> Specialization</dt>
-            <dd>Compliance-grade commercial kitchen equipment &amp; supplies</dd>
-          </div>
-          <div class="profile-row">
-            <dt><span class="dot-ico dot-6" aria-hidden="true"></span> Certifications</dt>
-            <dd>
-              <div class="chip-list">
-                <span class="chip">NSF International</span>
-                <span class="chip">ISO 22000</span>
-                <span class="chip">HACCP</span>
-                <span class="chip">SFA</span>
-              </div>
-            </dd>
-          </div>
-          <div class="profile-row">
-            <dt><span class="dot-ico dot-7" aria-hidden="true"></span> Clientele</dt>
-            <dd>Hotels, restaurants, catering companies, hospital kitchens and school canteens</dd>
-          </div>
-          <div class="profile-row">
-            <dt><span class="dot-ico dot-8" aria-hidden="true"></span> Coverage</dt>
-            <dd>Island-wide delivery with <b>express options for Colombo metro</b></dd>
-          </div>
-        </dl>
-      </div>
-
-      <div class="profile-side">
-        <div class="side-panel reveal">
-          <h3>What ships with every order</h3>
-          <p>Documentation is not an afterthought &mdash; it is part of the product.</p>
-          <ul class="side-list">
-            <li><span class="tick" aria-hidden="true">&#10003;</span> Certificate of conformity per batch</li>
-            <li><span class="tick" aria-hidden="true">&#10003;</span> Calibration record for measuring devices</li>
-            <li><span class="tick" aria-hidden="true">&#10003;</span> Material safety data sheets for chemicals</li>
-            <li><span class="tick" aria-hidden="true">&#10003;</span> Digital invoice with full SKU traceability</li>
-          </ul>
-        </div>
-        <div class="side-panel light reveal">
-          <h3>Audit support line</h3>
-          <div class="big">7 days</div>
-          <p>Our compliance desk is reachable seven days a week for spot-check questions, replacement paperwork and urgent replenishment.</p>
-        </div>
-      </div>
     </div>
 
     <!-- Values -->
@@ -2121,12 +1978,12 @@ body.modal-open{overflow:hidden;}
       <div>
         <h4>Contact</h4>
         <ul class="contact-list">
-          <li><span class="ci" aria-hidden="true">&#128205;</span><span><b>Head Office</b>No. 111/4, Thewatte Road,<br>Ragama, Sri Lanka</span></li>
-          <li><span class="ci" aria-hidden="true">&#127974;</span><span><b>Showroom</b>No. 265, Negombo Road,<br>Dandugama, Ja-Ela, Sri Lanka</span></li>
-          <li><span class="ci" aria-hidden="true">&#128222;</span><span><b>Hotline</b><a href="tel:+94777868805">+94 77 786 8805</a><br><a href="tel:+94763703232">+94 76 370 3232</a></span></li>
-          <li><span class="ci" aria-hidden="true">&#9742;</span><span><b>Showroom TP</b><a href="tel:+94113616151">+94 11 361 6151</a></span></li>
-          <li><span class="ci" aria-hidden="true">&#9993;</span><a href="mailto:thayonagtd@gmail.com">thayonagtd@gmail.com</a></li>
-          <li><span class="ci" aria-hidden="true">&#128336;</span><span>Mon&ndash;Fri 8:30am&ndash;6:00pm<br>Sat 9:00am&ndash;1:00pm</span></li>
+          <li><span class="ci" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3.8 20.8h16.4"/><path d="M6.6 20.8V5.2a1.4 1.4 0 0 1 1.4-1.4h8a1.4 1.4 0 0 1 1.4 1.4v15.6"/><path d="M10 8h4M10 11.7h4"/><path d="M10.4 20.8v-3.6h3.2v3.6"/></svg></span><span><b>Head Office</b>No. 111/4, Thewatte Road,<br>Ragama, Sri Lanka</span></li>
+          <li><span class="ci" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3.6 8.3h16.8"/><path d="M5.1 8.3 6.6 4.5a1 1 0 0 1 .93-.63h8.94a1 1 0 0 1 .93.63l1.5 3.8"/><path d="M5.5 8.3v10.9a1.4 1.4 0 0 0 1.4 1.4h10.2a1.4 1.4 0 0 0 1.4-1.4V8.3"/><path d="M9.5 20.6v-4.9a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v4.9"/></svg></span><span><b>Showroom</b>No. 265, Negombo Road,<br>Dandugama, Ja-Ela, Sri Lanka</span></li>
+          <li><span class="ci" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6.8" y="2.5" width="10.4" height="19" rx="2.6"/><path d="M10.6 5.5h2.8"/><path d="M12 18.3h.01"/></svg></span><span><b>Hotline</b><a href="tel:+94777868805">+94 77 786 8805</a><br><a href="tel:+94763703232">+94 76 370 3232</a></span></li>
+          <li><span class="ci" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.3 3.4h3.1l1.5 3.9-2 1.3a12.2 12.2 0 0 0 5.8 5.8l1.3-2 3.9 1.5v3.1a2 2 0 0 1-2.2 2A16.6 16.6 0 0 1 4.3 5.6a2 2 0 0 1 2-2.2z"/></svg></span><span><b>Showroom TP</b><a href="tel:+94113616151">+94 11 361 6151</a></span></li>
+          <li><span class="ci" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.2" y="5.4" width="17.6" height="13.2" rx="2.2"/><path d="m3.8 7 8.2 5.6L20.2 7"/></svg></span><a href="mailto:thayonagtd@gmail.com">thayonagtd@gmail.com</a></li>
+          <li><span class="ci" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.6"/><path d="M12 7.1V12l3.3 2"/></svg></span><span>Mon&ndash;Fri 8:30am&ndash;6:00pm<br>Sat 9:00am&ndash;1:00pm</span></li>
         </ul>
       </div>
 
