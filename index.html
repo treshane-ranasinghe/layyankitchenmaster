@@ -15,7 +15,7 @@
 /* ============================================================
    Layaan Kitchen Masters — single-file site
    1. Tokens & reset      5. About + stats
-   2. Buttons & shared    6. Company profile
+   2. Buttons & shared    6. What we offer
    3. Navigation          7. Products
    4. Hero                8. Footer  9. Responsive  10. Motion
    ============================================================ */
@@ -154,8 +154,7 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 12px);}
   content:"";position:absolute;left:0;bottom:0;height:5px;width:clamp(72px,42%,150px);
   background:linear-gradient(90deg,var(--accent-gold),var(--gold));border-radius:var(--pill);
 }
-.center .underline-gold::after,
-.values-head .underline-gold::after{left:50%;transform:translateX(-50%);}
+.center .underline-gold::after{left:50%;transform:translateX(-50%);}
 .lead{font-size:clamp(1.02rem,.98rem + .3vw,1.18rem);}
 
 /* ---------- 2. Buttons & shared bits ---------- */
@@ -417,8 +416,7 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 12px);}
 }
 .stat span{display:block;margin-top:.4rem;color:#fff;font-size:.9rem;letter-spacing:.04em;}
 
-/* ---------- 6. Company profile ---------- */
-.values-head{margin:clamp(3.5rem,6vw,5.5rem) 0 clamp(2rem,3vw,2.75rem);text-align:center;}
+/* ---------- 6. What we offer ---------- */
 .value-card{text-align:left;transition:transform .4s var(--ease),box-shadow .4s ease;}
 .value-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-card-hover);}
 .value-card .icon-circle.v1{background:linear-gradient(140deg,var(--gold),var(--accent-gold));}
@@ -1662,9 +1660,10 @@ body.modal-open{overflow:hidden;}
       <ul class="nav-links" id="navLinks">
         <li><a href="#home" class="nav-link active">Home</a></li>
         <li><a href="#about" class="nav-link">About Us</a></li>
-        <li><a href="#profile" class="nav-link">Company Profile</a></li>
+        <li><a href="#solutions" class="nav-link">What We Offer</a></li>
         <li><a href="#products" class="nav-link">Products</a></li>
         <li><a href="#process" class="nav-link">Our Process</a></li>
+        <li><a href="#quote" class="nav-link">Contact</a></li>
       </ul>
     </div>
   </nav>
@@ -1755,12 +1754,13 @@ body.modal-open{overflow:hidden;}
     <div class="section-head reveal">
       <span class="eyebrow"><span class="eyebrow-num">02</span>Our story</span>
       <h2 class="underline-gold">About Layaan Kitchen Masters</h2>
+      <p class="lead">Layaan Kitchen Masters designs, manufactures, supplies and installs commercial kitchen equipment and customised stainless-steel solutions &mdash; 12+ years in the industry, a client network that reaches across Sri Lanka and project experience in international markets.</p>
     </div>
 
     <div class="about-grid">
       <div class="about-copy">
         <div class="reveal">
-          <p>Layaan Kitchen Masters has spent more than 12 years in the commercial kitchen industry, and that time has taught us what it takes to create kitchens that perform in demanding professional environments. We design, manufacture, supply and install commercial kitchen equipment and customised stainless-steel solutions for businesses across Sri Lanka and international markets.</p>
+          <p>Layaan Kitchen Masters has spent more than 12 years in the commercial kitchen industry, and that time has taught us what it takes to create kitchens that perform in demanding professional environments.</p>
         </div>
         <div class="reveal">
           <p>From a single piece of equipment to a complete kitchen project, our team brings together industry experience, technical knowledge, quality manufacturing and professional project coordination. Whether you are opening a restaurant, developing a hotel, expanding a bakery or establishing a large-scale food service operation, we provide the equipment and solutions you need.</p>
@@ -1780,18 +1780,11 @@ body.modal-open{overflow:hidden;}
   </div>
 </section>
 
-<!-- ======================= 3. COMPANY PROFILE ======================= -->
-<section id="profile" class="section section--light" aria-label="Company profile">
+<!-- ======================= 3. WHAT WE OFFER ======================= -->
+<section id="solutions" class="section section--light" aria-label="What we offer">
   <div class="container">
-    <div class="section-head reveal">
-      <span class="eyebrow"><span class="eyebrow-num">03</span>At a glance</span>
-      <h2 class="underline-gold">Company Profile</h2>
-      <p class="lead">Layaan Kitchen Masters designs, manufactures, supplies and installs commercial kitchen equipment and customised stainless-steel solutions &mdash; 12+ years in the industry, a client network that reaches across Sri Lanka and project experience in international markets.</p>
-    </div>
-
-    <!-- Products &amp; solutions -->
-    <div class="values-head reveal">
-      <span class="eyebrow">What we offer</span>
+    <div class="section-head center reveal">
+      <span class="eyebrow"><span class="eyebrow-num">03</span>What we offer</span>
       <h2 class="underline-gold">Everything For Your Commercial Kitchen</h2>
       <p class="lead">One partner. Complete solutions. Whether you are opening a restaurant, developing a hotel, expanding a bakery or establishing a large-scale food service operation, we provide the equipment and solutions you need.</p>
     </div>
@@ -1840,55 +1833,6 @@ body.modal-open{overflow:hidden;}
     </div>
 
     <p class="values-cta reveal"><a href="#products" class="btn btn--green">Explore All Products</a></p>
-
-      <!-- ===================== LOCATION MAP ===================== -->
-      <div class="map-block">
-        <div class="map-head reveal">
-          <span class="eyebrow">Find us</span>
-          <h3 class="map-title">Visit Our Facilities</h3>
-          <p class="lead">Our head office and our showroom operate across two sites. Pick a location to see its address, hours and directions. Trade visits are welcome by appointment.</p>
-        </div>
-
-        <!-- Tabs are generated from BUSINESS_LOCATIONS at the bottom of this
-             file; the empty list simply stays hidden if the script is blocked. -->
-        <div class="map-tabs reveal" id="mapTabs" role="group" aria-label="Choose a location"></div>
-
-        <div class="map-shell reveal">
-          <div class="map-canvas">
-            <!-- Map frame. The coordinates come from BUSINESS_LOCATION in the
-                 script at the bottom of this file - edit them there and this
-                 src, the readout and both links all update together. -->
-            <iframe
-              class="map-frame"
-              id="mapFrame"
-              title="Google Map showing the Layaan Kitchen Masters head office in Ragama, Sri Lanka"
-              src="https://www.google.com/maps?q=6.9846,79.9207&amp;z=16&amp;hl=en&amp;output=embed"
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              allowfullscreen></iframe>
-
-            <div class="map-vignette" aria-hidden="true"></div>
-          </div>
-
-          <aside class="map-card" id="mapCard" aria-label="Facility address and directions" aria-live="polite">
-            <span class="map-card-tag" id="mapCardTag">Head Office</span>
-            <h4 id="mapCardName">Layaan Kitchen Masters</h4>
-            <ul class="map-details">
-              <li><span class="md-ico" aria-hidden="true">&#128205;</span><span id="mapCardAddress">No. 111/4, Thewatte Road<br>Ragama, Sri Lanka</span></li>
-              <li><span class="md-ico" aria-hidden="true">&#128336;</span><span id="mapCardHours">Mon&ndash;Fri 8:30am&ndash;6:00pm<br>Sat 9:00am&ndash;1:00pm</span></li>
-              <li><span class="md-ico" aria-hidden="true">&#128222;</span><a id="mapCardPhone" href="tel:+94777868805">+94 77 786 8805</a></li>
-            </ul>
-            <p class="map-coords" id="mapCoords" data-pending="true">
-              <span id="mapCoordsValue">Locating…</span>
-              <span class="map-coords-note" id="mapCoordsNote">Provisional pin — awaiting confirmed GPS</span>
-            </p>
-            <div class="map-actions">
-              <a class="btn btn--green btn--sm" id="mapDirections" href="#profile" aria-label="Get directions to the Layaan Kitchen Masters facility">Get Directions</a>
-              <a class="btn btn--ghost-dark btn--sm" id="mapView" href="#profile" aria-label="View the facility location on a larger map">Larger Map</a>
-            </div>
-          </aside>
-        </div>
-      </div>
   </div>
 </section>
 
@@ -3315,8 +3259,8 @@ body.modal-open{overflow:hidden;}
   </div>
 </section>
 
-<!-- ======================= 7. REQUEST A QUOTE ======================= -->
-<section id="quote" class="section section--light" aria-label="Request a quote">
+<!-- ================= 7. REQUEST A QUOTE / CONTACT ================= -->
+<section id="quote" class="section section--light" aria-label="Request a quote and visit our facilities">
   <div class="container">
     <div class="quote-layout">
 
@@ -3432,6 +3376,55 @@ body.modal-open{overflow:hidden;}
       </div>
 
     </div>
+
+    <!-- ===================== LOCATION MAP / VISIT US ===================== -->
+    <div class="map-block">
+      <div class="map-head reveal">
+        <span class="eyebrow">Find us</span>
+        <h3 class="map-title">Visit Our Facilities</h3>
+        <p class="lead">Our head office and our showroom operate across two sites. Pick a location to see its address, hours and directions. Trade visits are welcome by appointment.</p>
+      </div>
+
+      <!-- Tabs are generated from BUSINESS_LOCATIONS at the bottom of this
+           file; the empty list simply stays hidden if the script is blocked. -->
+      <div class="map-tabs reveal" id="mapTabs" role="group" aria-label="Choose a location"></div>
+
+      <div class="map-shell reveal">
+        <div class="map-canvas">
+          <!-- Map frame. The coordinates come from BUSINESS_LOCATION in the
+               script at the bottom of this file - edit them there and this
+               src, the readout and both links all update together. -->
+          <iframe
+            class="map-frame"
+            id="mapFrame"
+            title="Google Map showing the Layaan Kitchen Masters head office in Ragama, Sri Lanka"
+            src="https://www.google.com/maps?q=6.9846,79.9207&amp;z=16&amp;hl=en&amp;output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen></iframe>
+
+          <div class="map-vignette" aria-hidden="true"></div>
+        </div>
+
+        <aside class="map-card" id="mapCard" aria-label="Facility address and directions" aria-live="polite">
+          <span class="map-card-tag" id="mapCardTag">Head Office</span>
+          <h4 id="mapCardName">Layaan Kitchen Masters</h4>
+          <ul class="map-details">
+            <li><span class="md-ico" aria-hidden="true">&#128205;</span><span id="mapCardAddress">No. 111/4, Thewatte Road<br>Ragama, Sri Lanka</span></li>
+            <li><span class="md-ico" aria-hidden="true">&#128336;</span><span id="mapCardHours">Mon&ndash;Fri 8:30am&ndash;6:00pm<br>Sat 9:00am&ndash;1:00pm</span></li>
+            <li><span class="md-ico" aria-hidden="true">&#128222;</span><a id="mapCardPhone" href="tel:+94777868805">+94 77 786 8805</a></li>
+          </ul>
+          <p class="map-coords" id="mapCoords" data-pending="true">
+            <span id="mapCoordsValue">Locating…</span>
+            <span class="map-coords-note" id="mapCoordsNote">Provisional pin — awaiting confirmed GPS</span>
+          </p>
+          <div class="map-actions">
+            <a class="btn btn--green btn--sm" id="mapDirections" href="#quote" aria-label="Get directions to the Layaan Kitchen Masters facility">Get Directions</a>
+            <a class="btn btn--ghost-dark btn--sm" id="mapView" href="#quote" aria-label="View the facility location on a larger map">Larger Map</a>
+          </div>
+        </aside>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -3462,9 +3455,10 @@ body.modal-open{overflow:hidden;}
         <ul class="footer-list">
           <li><a href="#home"><span class="mini-dot" aria-hidden="true"></span> Home</a></li>
           <li><a href="#about"><span class="mini-dot" aria-hidden="true"></span> About Us</a></li>
-          <li><a href="#profile"><span class="mini-dot" aria-hidden="true"></span> Company Profile</a></li>
+          <li><a href="#solutions"><span class="mini-dot" aria-hidden="true"></span> What We Offer</a></li>
           <li><a href="#products"><span class="mini-dot" aria-hidden="true"></span> Products</a></li>
           <li><a href="#process"><span class="mini-dot" aria-hidden="true"></span> Our Process</a></li>
+          <li><a href="#industries"><span class="mini-dot" aria-hidden="true"></span> Who We Serve</a></li>
           <li><a href="#quote"><span class="mini-dot" aria-hidden="true"></span> Request a Quote</a></li>
         </ul>
       </div>
