@@ -426,6 +426,45 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 12px);}
 .value-card .icon-circle.v3{background:linear-gradient(140deg,var(--green),var(--yellow));}
 
 /* ---------- 7. Products ---------- */
+.psearch{
+  display:flex;align-items:center;gap:.35rem;
+  width:100%;max-width:520px;margin:0 0 .55rem;
+  padding:.3rem .4rem;border-radius:var(--pill);
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);
+  transition:background-color .3s ease,border-color .3s ease,box-shadow .3s ease;
+}
+.psearch:focus-within{
+  background:rgba(255,255,255,.13);border-color:rgba(255,213,30,.5);
+  box-shadow:0 0 0 4px rgba(255,213,30,.13);
+}
+.psearch-go,.psearch-clear{
+  flex:none;display:grid;place-items:center;width:38px;height:38px;border-radius:50%;
+  color:rgba(255,255,255,.72);
+  transition:background-color .3s ease,color .3s ease,transform .3s var(--ease);
+}
+.psearch-go svg,.psearch-clear svg{
+  width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;
+}
+/* display:grid above would otherwise beat the browser's own [hidden] rule */
+.psearch-clear[hidden]{display:none;}
+.psearch-go:hover{background:var(--gold-accent,#FFD51E);color:#1A1A2E;transform:scale(1.06);}
+.psearch-clear:hover{background:rgba(255,255,255,.14);color:#fff;transform:scale(1.06);}
+.psearch-input{
+  flex:1;min-width:0;padding:.5rem .15rem;
+  background:transparent;border:0;outline:none;color:#fff;
+  font-family:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;font-size:.92rem;
+}
+.psearch-input::placeholder{color:rgba(255,255,255,.5);}
+/* our own clear button replaces the one WebKit draws inside type="search" */
+.psearch-input::-webkit-search-cancel-button,
+.psearch-input::-webkit-search-decoration{-webkit-appearance:none;appearance:none;}
+/* min-height holds the line open so results do not jump when the count appears */
+.psearch-count{
+  margin:0 0 .9rem;min-height:1.2em;
+  font-size:.82rem;letter-spacing:.02em;color:rgba(255,255,255,.62);
+}
+.psearch-count b{color:var(--gold-accent,#FFD51E);font-weight:600;}
+
 .filter-bar{
   display:flex;flex-wrap:wrap;gap:.65rem;margin-bottom:clamp(2rem,3.2vw,2.75rem);
   padding-bottom:.5rem;scrollbar-width:thin;
@@ -1862,6 +1901,26 @@ body.modal-open{overflow:hidden;}
       <p class="lead">Commercial kitchen equipment and customised stainless-steel solutions, built for professional performance.</p>
     </div>
 
+    <!-- Live search. Typing filters the grid on the fly, and it stacks with
+         whichever category pill is active: the two narrow the list together. -->
+    <form class="psearch reveal" id="productSearchForm" role="search" aria-label="Search products">
+      <label class="sr-only" for="productSearch">Search products</label>
+      <button type="submit" class="psearch-go" aria-label="Search products">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <circle cx="10.5" cy="10.5" r="6.5"></circle><line x1="15.5" y1="15.5" x2="20.5" y2="20.5"></line>
+        </svg>
+      </button>
+      <input type="search" class="psearch-input" id="productSearch" autocomplete="off"
+             placeholder="Search by name, item code or specification&hellip;"
+             aria-controls="productGrid" aria-describedby="productSearchCount">
+      <button type="button" class="psearch-clear" id="productSearchClear" aria-label="Clear search" hidden>
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <line x1="6.5" y1="6.5" x2="17.5" y2="17.5"></line><line x1="17.5" y1="6.5" x2="6.5" y2="17.5"></line>
+        </svg>
+      </button>
+    </form>
+    <p class="psearch-count" id="productSearchCount" role="status"></p>
+
     <div class="filter-bar reveal" role="group" aria-label="Filter products by category">
       <button class="filter-btn" aria-pressed="true" aria-controls="productGrid" data-filter="all">All</button>
       <button class="filter-btn" aria-pressed="false" aria-controls="productGrid" data-filter="cooking">Cooking Ranges</button>
@@ -1970,14 +2029,17 @@ body.modal-open{overflow:hidden;}
       </article>
 
       <!-- ------------------------------------------------------------------
-           LK-TE-DRG-300. Holding copy again - swap the <p> and data-specs
-           pairs when the real wording arrives. Only one photograph supplied
-           so far; add the second to data-images and the thumbnail strip
-           appears on its own.
+           Automatic drum wok cooker. Re-coded from DRG-300 to DRE-260 on
+           the user's instruction when the gas drum machine arrived: DRE and
+           DRG read as the electric and gas stems of the same range, so the
+           two sit side by side under different codes.
+           Nothing in this photograph confirms electric heating, so the copy
+           does not claim it - only the code stem suggests it.
+           Holding copy as with the rest.
            ------------------------------------------------------------------ -->
-      <article class="product-card reveal" data-sku="LK-TE-DRG-300" data-lead="Available on request" data-specs="Configuration::Single rotating cooking drum|Body::Stainless steel on four adjustable feet|Drum::Coated interior with internal stirring fins|Controls::Digital panel with dial controls|Handle::Side lever tips the drum for serving and cleaning|Suits::Fried rice, curries and other batch cooking" data-category="machines" data-images="assets/products/lk-te-drg-300-1.jpeg::Layaan LK-TE-DRG-300 automatic drum wok cooker with digital control panel">
+      <article class="product-card reveal" data-sku="LK-TE-DRE-260" data-lead="Available on request" data-specs="Configuration::Single rotating cooking drum|Body::Stainless steel on four adjustable feet|Drum::Coated interior with internal stirring fins|Controls::Digital panel with dial controls|Handle::Side lever tips the drum for serving and cleaning|Suits::Fried rice, curries and other batch cooking" data-category="machines" data-images="assets/products/lk-te-drg-300-1.jpeg::Layaan LK-TE-DRG-300 automatic drum wok cooker with digital control panel">
         <div class="p-media p-media--photo">
-          <span class="p-badge">LK-TE-DRG-300</span>
+          <span class="p-badge">LK-TE-DRE-260</span>
           <div class="p-media-inner">
             <img src="assets/products/lk-te-drg-300-1.jpeg" width="455" height="500" loading="lazy" decoding="async"
                  alt="Layaan LK-TE-DRG-300 automatic drum wok cooker with digital control panel">
@@ -2471,7 +2533,7 @@ body.modal-open{overflow:hidden;}
         </div>
         <div class="p-body">
           <span class="p-cat">Sinks &amp; Tabling</span>
-          <h3><button type="button" class="p-open">Four-Tier Storage Rack</button></h3>
+          <h3><button type="button" class="p-open">Four-Tier Slatted Rack</button></h3>
           <p>Four open slatted tiers on a tubular stainless frame &mdash; air and water pass straight through, so it suits chillers and wash-up stores.</p>
           <div class="p-foot">
             <span class="p-price">Price on request<small>contact us for a quotation</small></span>
@@ -2752,10 +2814,14 @@ body.modal-open{overflow:hidden;}
            other counter-top cooking appliances - the gas stove and the
            induction hob - rather than Cooking Machines, which holds the
            cabinet machines.
-           Code to follow. Holding copy as with the rest.
+           Shares the DF prefix with the twin-tank fryer; the twin is marked
+           by the doubled form, 6*6L against this one's 6L. The badges spell
+           that out so the two cards do not read alike in the grid.
+           Holding copy as with the rest.
            ------------------------------------------------------------------ -->
-      <article class="product-card reveal" data-lead="Available on request" data-specs="Configuration::Single tank with a wire mesh basket|Controls::Temperature dial with power and heat lights|Element::Swings up clear of the tank for draining|Basket::Wire mesh with an insulated handle|Body::Stainless steel counter-top housing|Suits::Chips, short eats and small fry stations" data-category="cooking" data-images="assets/products/lk-fryer-counter-1.webp::Layaan counter-top electric deep fryer with a single stainless tank, wire mesh basket, temperature dial and indicator lights">
+      <article class="product-card reveal" data-sku="LK-TE-DF-6L, LK-TE-DF-8L, LK-TE-DF-11L" data-lead="Available on request" data-specs="Configuration::Single tank with a wire mesh basket|LK-TE-DF-6L::6 litre tank|LK-TE-DF-8L::8 litre tank|LK-TE-DF-11L::11 litre tank|Controls::Temperature dial with power and heat lights|Element::Swings up clear of the tank for draining|Basket::Wire mesh with an insulated handle|Body::Stainless steel counter-top housing|Suits::Chips, short eats and small fry stations" data-category="cooking" data-images="assets/products/lk-fryer-counter-1.webp::Layaan counter-top electric deep fryer with a single stainless tank, wire mesh basket, temperature dial and indicator lights">
         <div class="p-media p-media--photo">
+          <span class="p-badge">LK-TE-DF-6 / 8 / 11L</span>
           <div class="p-media-inner">
             <img src="assets/products/lk-fryer-counter-1.webp" width="985" height="1000" loading="lazy" decoding="async"
                  alt="Layaan counter-top electric deep fryer with a single stainless tank, wire mesh basket, temperature dial and indicator lights">
@@ -2764,7 +2830,7 @@ body.modal-open{overflow:hidden;}
         <div class="p-body">
           <span class="p-cat">Cooking Ranges</span>
           <h3><button type="button" class="p-open">Single-Tank Electric Fryer</button></h3>
-          <p>A single-tank electric fryer with a dial thermostat and indicator lights &mdash; the element swings up so the tank drains and wipes out clean.</p>
+          <p>A single-tank electric fryer at 6, 8 or 11 litres, with a dial thermostat and indicator lights &mdash; the element swings up so the tank drains and wipes out clean.</p>
           <div class="p-foot">
             <span class="p-price">Price on request<small>contact us for a quotation</small></span>
             <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
@@ -2776,10 +2842,14 @@ body.modal-open{overflow:hidden;}
            Twin-tank electric fryer. Sibling of the single-tank fryer, which
            was renamed to "Single-Tank" when this arrived so the pair reads
            by tank count rather than one being the generic.
-           Code to follow. Holding copy as with the rest.
+           DF codes read as tank capacities - 6*6L is two six litre tanks -
+           so each is split out against its size. The single-tank fryer uses
+           the same DF prefix without the doubling: 6L, 8L, 11L.
+           Holding copy as with the rest.
            ------------------------------------------------------------------ -->
-      <article class="product-card reveal" data-lead="Available on request" data-specs="Configuration::Two independent tanks, one basket each|Controls::A temperature dial and indicator lights per tank|Elements::Swing up clear of each tank for draining|Lids::One to each tank|Body::Stainless steel counter-top housing|Suits::Keeping fry types apart, or doubling output" data-category="cooking" data-images="assets/products/lk-fryer-counter-twin-1.webp::Layaan twin-tank counter-top electric fryer with two independently controlled tanks, two mesh baskets and a lid to each tank">
+      <article class="product-card reveal" data-sku="LK-TE-DF-6*6L, LK-TE-DF-8*8L, LK-TE-DF-11*11L" data-lead="Available on request" data-specs="Configuration::Two independent tanks, one basket each|LK-TE-DF-6*6L::Two 6 litre tanks|LK-TE-DF-8*8L::Two 8 litre tanks|LK-TE-DF-11*11L::Two 11 litre tanks|Controls::A temperature dial and indicator lights per tank|Elements::Swing up clear of each tank for draining|Lids::One to each tank|Body::Stainless steel counter-top housing|Suits::Keeping fry types apart, or doubling output" data-category="cooking" data-images="assets/products/lk-fryer-counter-twin-1.webp::Layaan twin-tank counter-top electric fryer with two independently controlled tanks, two mesh baskets and a lid to each tank">
         <div class="p-media p-media--photo">
+          <span class="p-badge">LK-TE-DF-6*6 / 8*8 / 11*11L</span>
           <div class="p-media-inner">
             <img src="assets/products/lk-fryer-counter-twin-1.webp" width="400" height="282" loading="lazy" decoding="async"
                  alt="Layaan twin-tank counter-top electric fryer with two independently controlled tanks, two mesh baskets and a lid to each tank">
@@ -2788,7 +2858,7 @@ body.modal-open{overflow:hidden;}
         <div class="p-body">
           <span class="p-cat">Cooking Ranges</span>
           <h3><button type="button" class="p-open">Twin-Tank Electric Fryer</button></h3>
-          <p>Two separately controlled tanks in one counter-top body &mdash; run different oils side by side, or simply fry twice as much at once.</p>
+          <p>Two separately controlled tanks in one counter-top body, at 6, 8 or 11 litres each &mdash; run different oils side by side, or simply fry twice as much at once.</p>
           <div class="p-foot">
             <span class="p-price">Price on request<small>contact us for a quotation</small></span>
             <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
@@ -2930,6 +3000,228 @@ body.modal-open{overflow:hidden;}
           <span class="p-cat">Display Counters</span>
           <h3><button type="button" class="p-open">Nine-Pan Gastronorm Trolley</button></h3>
           <p>Nine lidded pans in a three-by-three top, over a solid shelf and a slatted rack &mdash; wheeled to where the service happens.</p>
+          <div class="p-foot">
+            <span class="p-price">Price on request<small>contact us for a quotation</small></span>
+            <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ------------------------------------------------------------------
+           Four-door upright chiller. The two-door sibling carries URC, URF
+           and URCOM codes and is titled "Cabinet" because of it; only the
+           chiller code was given here, so this one is titled "Chiller". If
+           it is built as a freezer and a combination too, it wants URF-4 and
+           URCOM-4 and the same rename.
+           The first photograph supplied was a 180x148 thumbnail; this is
+           the full size studio shot sent afterwards, from the same series
+           as the two-door's.
+           Holding copy as with the rest.
+           ------------------------------------------------------------------ -->
+      <article class="product-card reveal" data-sku="LK-TE-URC-4" data-lead="Available on request" data-specs="Configuration::Upright cabinet with four half-doors|Controls::Digital display on the condenser deck|Condenser::Top mounted, above the doors|Mobility::Castor mounted|Body::Stainless steel throughout|Suits::Bulk cold storage, twice the two-door's capacity" data-category="refrigeration" data-images="assets/products/lk-chiller-upright-4door-1.webp::Layaan four-door upright stainless steel refrigerated cabinet with a top-mounted condenser deck, digital display and castors">
+        <div class="p-media p-media--photo">
+          <span class="p-badge">LK-TE-URC-4</span>
+          <div class="p-media-inner">
+            <img src="assets/products/lk-chiller-upright-4door-1.webp" width="603" height="906" loading="lazy" decoding="async"
+                 alt="Layaan four-door upright stainless steel refrigerated cabinet with a top-mounted condenser deck, digital display and castors">
+          </div>
+        </div>
+        <div class="p-body">
+          <span class="p-cat">Refrigeration</span>
+          <h3><button type="button" class="p-open">Four-Door Upright Chiller</button></h3>
+          <p>The same full-height reach-in with four half-doors instead of two &mdash; twice the cold storage in one cabinet run.</p>
+          <div class="p-foot">
+            <span class="p-price">Price on request<small>contact us for a quotation</small></span>
+            <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ------------------------------------------------------------------
+           Four-tier solid rack. Third rack at 1800: S-1800 is slatted bar,
+           C-1800 is punched sheet, and this one - plain LK-TE-1800, no stem
+           letter - is solid. The S-1800 was renamed from "Storage Rack" to
+           "Slatted Rack" so all three read by shelf type.
+           Photographed on a light grey studio gradient rather than white, so
+           it will not trim and sits as a faint panel inside the white frame.
+           Every leg and shelf edge is open, so a hand mask would show the
+           backdrop between them - a proper cut-out is the only clean fix.
+           Holding copy as with the rest.
+           ------------------------------------------------------------------ -->
+      <article class="product-card reveal" data-sku="LK-TE-1800" data-lead="Available on request" data-specs="Configuration::Four solid tiers on a tubular frame|Shelves::Flat sheet, no slats or perforations|Frame::Tubular stainless uprights|Feet::Adjustable|Body::Stainless steel throughout|Suits::Dry goods and small items that fall through open shelving" data-category="sinks" data-images="assets/products/lk-rack-4tier-solid-1.webp::Layaan four-tier stainless steel shelving rack with flat solid shelves on a tubular frame">
+        <div class="p-media p-media--photo">
+          <span class="p-badge">LK-TE-1800</span>
+          <div class="p-media-inner">
+            <img src="assets/products/lk-rack-4tier-solid-1.webp" width="447" height="447" loading="lazy" decoding="async"
+                 alt="Layaan four-tier stainless steel shelving rack with flat solid shelves on a tubular frame">
+          </div>
+        </div>
+        <div class="p-body">
+          <span class="p-cat">Sinks &amp; Tabling</span>
+          <h3><button type="button" class="p-open">Four-Tier Solid Rack</button></h3>
+          <p>Four flat solid tiers on a tubular frame &mdash; nothing drops through and the shelves wipe flat, where the slatted and perforated racks drain instead.</p>
+          <div class="p-foot">
+            <span class="p-price">Price on request<small>contact us for a quotation</small></span>
+            <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ------------------------------------------------------------------
+           Smooth-plate gas griddle. Re-coded from 722 to 720 and renamed
+           when the split-plate gas unit arrived, so the bench griddles run
+           as a matched set: 720/722 gas smooth/split, 820/822 electric
+           smooth/split. The LK-TE-900 remains the five-burner floor unit.
+           Holding copy as with the rest.
+           ------------------------------------------------------------------ -->
+      <article class="product-card reveal" data-sku="LK-TE-720" data-lead="Available on request" data-specs="Configuration::Flat griddle plate over two gas zones|Controls::One knob per zone, so half can run cooler|Plate::Smooth steel with rear and side splash guards|Grease::Pull-out drawer under the front lip|Mounting::Counter-top, on short feet|Suits::Breakfast, burgers and short-order griddling" data-category="cooking" data-images="assets/products/lk-griddle-counter-1.webp::Layaan counter-top gas griddle with a smooth steel plate, rear and side splash guards, two control knobs and a front grease drawer">
+        <div class="p-media p-media--photo">
+          <span class="p-badge">LK-TE-720</span>
+          <div class="p-media-inner">
+            <img src="assets/products/lk-griddle-counter-1.webp" width="668" height="442" loading="lazy" decoding="async"
+                 alt="Layaan counter-top gas griddle with a smooth steel plate, rear and side splash guards, two control knobs and a front grease drawer">
+          </div>
+        </div>
+        <div class="p-body">
+          <span class="p-cat">Cooking Ranges</span>
+          <h3><button type="button" class="p-open">Smooth-Plate Gas Griddle</button></h3>
+          <p>A smooth bench-top plate with two separately controlled zones and a pull-out grease drawer &mdash; run one half hot and the other for holding.</p>
+          <div class="p-foot">
+            <span class="p-price">Price on request<small>contact us for a quotation</small></span>
+            <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ------------------------------------------------------------------
+           Counter-top electric griddle. Third griddle in Cooking Ranges and
+           the only electric one, so fuel plus footprint is what separates
+           the three: LK-TE-900 gas on a stand, LK-TE-720 gas on a bench,
+           this one electric on a bench.
+           Renamed to "Split-Plate" when the LK-TE-820 arrived: that is the
+           same body with a full smooth plate, so between the two electrics
+           it is the plate, not the footprint, that distinguishes them.
+           Holding copy as with the rest.
+           ------------------------------------------------------------------ -->
+      <article class="product-card reveal" data-sku="LK-TE-822" data-lead="Available on request" data-specs="Configuration::Half smooth plate, half ribbed|Controls::Two dial thermostats, one per half|Indicators::Power and heat lights to each side|Splash guard::Rear upstand|Mounting::Counter-top|Suits::Searing on the ribs, flat cooking alongside" data-category="cooking" data-images="assets/products/lk-griddle-electric-1.webp::Layaan counter-top electric griddle with a half smooth, half ribbed plate, two dial thermostats with indicator lights and a rear splash guard">
+        <div class="p-media p-media--photo">
+          <span class="p-badge">LK-TE-822</span>
+          <div class="p-media-inner">
+            <img src="assets/products/lk-griddle-electric-1.webp" width="542" height="220" loading="lazy" decoding="async"
+                 alt="Layaan counter-top electric griddle with a half smooth, half ribbed plate, two dial thermostats with indicator lights and a rear splash guard">
+          </div>
+        </div>
+        <div class="p-body">
+          <span class="p-cat">Cooking Ranges</span>
+          <h3><button type="button" class="p-open">Split-Plate Electric Griddle</button></h3>
+          <p>Half the plate smooth and half of it ribbed, each side on its own thermostat &mdash; sear on the grooves and cook flat alongside.</p>
+          <div class="p-foot">
+            <span class="p-price">Price on request<small>contact us for a quotation</small></span>
+            <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ------------------------------------------------------------------
+           Smooth-plate electric griddle. Same body as the LK-TE-822, which
+           carries a ribbed half; this one is smooth end to end. Both are
+           counter-top electrics, so the plate is what the names turn on.
+           Holding copy as with the rest.
+           ------------------------------------------------------------------ -->
+      <article class="product-card reveal" data-sku="LK-TE-820" data-lead="Available on request" data-specs="Configuration::Smooth plate end to end|Controls::Two dial thermostats, one per half|Indicators::Power and heat lights to each side|Splash guard::Rear and side upstands|Mounting::Counter-top|Suits::Breakfast, burgers and general flat-top work" data-category="cooking" data-images="assets/products/lk-griddle-electric-smooth-1.webp::Layaan counter-top electric griddle with a full smooth plate, rear and side splash guards and two dial thermostats with indicator lights">
+        <div class="p-media p-media--photo">
+          <span class="p-badge">LK-TE-820</span>
+          <div class="p-media-inner">
+            <img src="assets/products/lk-griddle-electric-smooth-1.webp" width="544" height="224" loading="lazy" decoding="async"
+                 alt="Layaan counter-top electric griddle with a full smooth plate, rear and side splash guards and two dial thermostats with indicator lights">
+          </div>
+        </div>
+        <div class="p-body">
+          <span class="p-cat">Cooking Ranges</span>
+          <h3><button type="button" class="p-open">Smooth-Plate Electric Griddle</button></h3>
+          <p>A smooth plate end to end, split across two thermostats &mdash; the whole top usable at once, or half of it held back.</p>
+          <div class="p-foot">
+            <span class="p-price">Price on request<small>contact us for a quotation</small></span>
+            <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ------------------------------------------------------------------
+           Split-plate gas griddle. Completes the bench griddle set: gas and
+           electric, each in a smooth and a split plate.
+             720 gas smooth   <-> 820 electric smooth
+             722 gas split    <-> 822 electric split
+           722 sat on the smooth gas unit until this arrived; that one moved
+           to 720 on the user's instruction rather than a code being
+           invented here.
+           Holding copy as with the rest.
+           ------------------------------------------------------------------ -->
+      <article class="product-card reveal" data-sku="LK-TE-722" data-lead="Available on request" data-specs="Configuration::Half smooth plate, half ribbed|Controls::One knob per zone|Plate::Smooth and ribbed halves over separate burners|Grease::Pull-out drawer under the front lip|Mounting::Counter-top, on short feet|Suits::Searing on the ribs, flat cooking alongside" data-category="cooking" data-images="assets/products/lk-griddle-gas-split-1.webp::Layaan counter-top gas griddle with a half smooth, half ribbed plate, two control knobs and a front grease drawer">
+        <div class="p-media p-media--photo">
+          <span class="p-badge">LK-TE-722</span>
+          <div class="p-media-inner">
+            <img src="assets/products/lk-griddle-gas-split-1.webp" width="800" height="579" loading="lazy" decoding="async"
+                 alt="Layaan counter-top gas griddle with a half smooth, half ribbed plate, two control knobs and a front grease drawer">
+          </div>
+        </div>
+        <div class="p-body">
+          <span class="p-cat">Cooking Ranges</span>
+          <h3><button type="button" class="p-open">Split-Plate Gas Griddle</button></h3>
+          <p>The gas version of the split plate &mdash; smooth on one half, ribbed on the other, each over its own burner.</p>
+          <div class="p-foot">
+            <span class="p-price">Price on request<small>contact us for a quotation</small></span>
+            <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ------------------------------------------------------------------
+           Induction cooker with timer. Second induction hob in Cooking
+           Ranges; the LK-TE-3.5 steps power from a single display, this one
+           sets a timer and a power level on separate displays and carries
+           three preset buttons, so the control panel is what the names turn
+           on rather than the footprint.
+           Code to follow. Holding copy as with the rest.
+           ------------------------------------------------------------------ -->
+      <article class="product-card reveal" data-lead="Available on request" data-specs="Configuration::Single induction zone|Top::Flat black ceramic glass|Controls::Touch panel with separate timer and power displays|Presets::Three cooking mode buttons|Body::Stainless steel counter-top housing|Suits::Flat-bottomed induction-ready pans" data-category="cooking" data-images="assets/products/lk-induction-timer-1.webp::Layaan counter-top induction cooker with a flat black ceramic glass top and a touch panel carrying separate timer and power displays">
+        <div class="p-media p-media--photo">
+          <div class="p-media-inner">
+            <img src="assets/products/lk-induction-timer-1.webp" width="384" height="318" loading="lazy" decoding="async"
+                 alt="Layaan counter-top induction cooker with a flat black ceramic glass top and a touch panel carrying separate timer and power displays">
+          </div>
+        </div>
+        <div class="p-body">
+          <span class="p-cat">Cooking Ranges</span>
+          <h3><button type="button" class="p-open">Induction Cooker with Timer</button></h3>
+          <p>A single induction zone under flat ceramic glass, with the timer and the power level set separately and three preset modes alongside.</p>
+          <div class="p-foot">
+            <span class="p-price">Price on request<small>contact us for a quotation</small></span>
+            <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ------------------------------------------------------------------
+           Gas drum wok machine. Sibling of the drum cooker above, which was
+           moved to the DRE stem so this one could take DRG. Two drum sizes,
+           260 and 300, so both codes sit on the one card.
+           Named "Gas" because the burner assembly is plainly visible under
+           the tilted drum - the clearest difference between the two cards.
+           Holding copy as with the rest.
+           ------------------------------------------------------------------ -->
+      <article class="product-card reveal" data-sku="LK-TE-DRG-260, LK-TE-DRG-300" data-lead="Available on request" data-specs="Configuration::Tilting cooking drum over a gas burner|LK-TE-DRG-260::260 drum|LK-TE-DRG-300::300 drum|Tilt::Lever handle, tips the drum to serve|Drum::Coated interior with internal stirring fins|Base::Bench-top stainless on levelling feet|Suits::Fried rice, curries and other batch cooking" data-category="machines" data-images="assets/products/lk-drum-wok-gas-1.webp::Layaan gas drum wok machine with a tilting non-stick drum over a gas burner, a lever tilt handle and a bench-top stainless base">
+        <div class="p-media p-media--photo">
+          <span class="p-badge">LK-TE-DRG-260 &amp; 300</span>
+          <div class="p-media-inner">
+            <img src="assets/products/lk-drum-wok-gas-1.webp" width="442" height="610" loading="lazy" decoding="async"
+                 alt="Layaan gas drum wok machine with a tilting non-stick drum over a gas burner, a lever tilt handle and a bench-top stainless base">
+          </div>
+        </div>
+        <div class="p-body">
+          <span class="p-cat">Cooking Machines</span>
+          <h3><button type="button" class="p-open">Gas Drum Wok Machine</button></h3>
+          <p>A tilting drum turning over an open gas burner, tipped out by the lever when it is done &mdash; built with a 260 or 300 drum.</p>
           <div class="p-foot">
             <span class="p-price">Price on request<small>contact us for a quotation</small></span>
             <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
@@ -3615,21 +3907,113 @@ body.modal-open{overflow:hidden;}
   var filterButtons = Array.prototype.slice.call(document.querySelectorAll('.filter-btn'));
   var productCards = Array.prototype.slice.call(document.querySelectorAll('.product-card'));
   var emptyState = document.getElementById('productEmpty');
+  var searchForm = document.getElementById('productSearchForm');
+  var searchInput = document.getElementById('productSearch');
+  var searchClear = document.getElementById('productSearchClear');
+  var searchCount = document.getElementById('productSearchCount');
+  var EMPTY_CATEGORY = emptyState ? emptyState.innerHTML : '';
 
-  function applyFilter(value) {
+  var activeCategory = 'all';
+  var activeQuery = '';
+
+  // Lowercase, and anything that is not a letter or a digit becomes a space, so
+  // "LK-TE-1500" and "lk te 1500" reduce to the same thing.
+  function words(text) {
+    return text.toLowerCase().replace(/[^a-z0-9]+/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+
+  // What gets searched keeps a run-together copy of itself alongside the words,
+  // so a code typed without its dashes - "lkte1500" - still finds its card.
+  // Only the card text is indexed this way, never the query: a query joined up
+  // would demand that the words the visitor typed sit next to each other.
+  function normalise(text) {
+    var spaced = words(text);
+    return spaced + ' ' + spaced.split(' ').join('');
+  }
+
+  function termsOf(query) {
+    var spaced = words(query);
+    return spaced ? spaced.split(' ') : [];
+  }
+
+  function escapeHtml(text) {
+    return String(text).replace(/[&<>"']/g, function (ch) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch];
+    });
+  }
+
+  // Words a customer is likely to type for a whole category but that the cards
+  // themselves never use. Nothing here claims a product we do not list - it
+  // only opens another way in to the ones we do.
+  var CATEGORY_TERMS = {
+    ventilation: 'exhaust hood extractor ventilation',
+    refrigeration: 'fridge refrigerator cooler cold storage',
+    sinks: 'tabling worktop bench',
+    machines: 'machine'
+  };
+
+  // Everything on the card worth searching: item code, category, the name, the
+  // description and every spec pair behind "View details". The price line and
+  // the "View details" label are left out - they are on every card, so they
+  // would match anything.
+  function haystack(card) {
+    var cached = card.getAttribute('data-search');
+    if (cached !== null) { return cached; }
+    var body = card.querySelector('.p-body');
+    var category = card.getAttribute('data-category') || '';
+    var parts = [
+      card.getAttribute('data-sku') || '',
+      category + ' ' + (CATEGORY_TERMS[category] || ''),
+      body ? textOf(body, '.p-cat') + ' ' + textOf(body, 'h3') + ' ' + textOf(body, 'p') : '',
+      (card.getAttribute('data-specs') || '').replace(/[|:]+/g, ' ')
+    ];
+    var text = normalise(parts.join(' '));
+    card.setAttribute('data-search', text);
+    return text;
+  }
+
+  function textOf(scope, selector) {
+    return Array.prototype.map.call(scope.querySelectorAll(selector), function (node) {
+      return node.textContent || '';
+    }).join(' ');
+  }
+
+  // Every word typed has to appear somewhere on the card, in any order.
+  function matchesQuery(card, terms) {
+    if (!terms.length) { return true; }
+    var text = haystack(card);
+    return terms.every(function (term) { return text.indexOf(term) > -1; });
+  }
+
+  function render() {
+    var terms = termsOf(activeQuery);
     var shown = 0;
 
     productCards.forEach(function (card) {
-      var match = value === 'all' || card.getAttribute('data-category') === value;
+      var match = (activeCategory === 'all' || card.getAttribute('data-category') === activeCategory)
+        && matchesQuery(card, terms);
       card.classList.toggle('is-hidden', !match);
       card.setAttribute('aria-hidden', String(!match));
       if (match) { shown += 1; }
     });
 
-    if (emptyState) { emptyState.classList.toggle('show', shown === 0); }
+    if (emptyState) {
+      emptyState.classList.toggle('show', shown === 0);
+      emptyState.innerHTML = activeQuery
+        ? 'Nothing matches &ldquo;' + escapeHtml(activeQuery) + '&rdquo; &mdash; try an item code, a product name or a broader word.'
+        : EMPTY_CATEGORY;
+    }
+
+    if (searchCount) {
+      searchCount.innerHTML = activeQuery
+        ? '<b>' + shown + '</b> of ' + productCards.length + ' products match &ldquo;' + escapeHtml(activeQuery) + '&rdquo;'
+        : '';
+    }
+
+    if (searchClear) { searchClear.hidden = !activeQuery; }
 
     filterButtons.forEach(function (btn) {
-      btn.setAttribute('aria-pressed', String(btn.getAttribute('data-filter') === value));
+      btn.setAttribute('aria-pressed', String(btn.getAttribute('data-filter') === activeCategory));
     });
 
     if (reduced()) { return; }
@@ -3651,6 +4035,11 @@ body.modal-open{overflow:hidden;}
     });
   }
 
+  function applyFilter(value) {
+    activeCategory = value;
+    render();
+  }
+
   filterButtons.forEach(function (btn) {
     btn.addEventListener('click', function () { applyFilter(btn.getAttribute('data-filter')); });
 
@@ -3669,12 +4058,64 @@ body.modal-open{overflow:hidden;}
     });
   });
 
-  // Footer category links jump to Products and pre-select that category.
+  // Footer category links jump to Products and pre-select that category. Any
+  // search still in the box is dropped, or the category would land on an empty
+  // grid for reasons the visitor cannot see from down there.
   document.querySelectorAll('[data-jump]').forEach(function (link) {
     link.addEventListener('click', function () {
+      activeQuery = '';
+      if (searchInput) { searchInput.value = ''; }
       applyFilter(link.getAttribute('data-jump'));
     });
   });
+
+  if (searchInput) {
+    // Filter as the visitor types. A short debounce keeps a fast typist ahead
+    // of the grid without the results ever feeling delayed.
+    var searchTimer = null;
+    searchInput.addEventListener('input', function () {
+      window.clearTimeout(searchTimer);
+      searchTimer = window.setTimeout(function () {
+        activeQuery = searchInput.value.trim();
+        render();
+      }, 120);
+    });
+
+    // Escape clears the box the way a search field is expected to behave.
+    searchInput.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape' || !searchInput.value) { return; }
+      e.preventDefault();
+      e.stopPropagation();   // do not let the product modal's Escape handler see it
+      clearSearch();
+    });
+  }
+
+  function clearSearch() {
+    if (!searchInput) { return; }
+    searchInput.value = '';
+    activeQuery = '';
+    render();
+    searchInput.focus();
+  }
+
+  if (searchClear) { searchClear.addEventListener('click', clearSearch); }
+
+  if (searchForm) {
+    // Nothing to submit - results are already live. On a phone this just closes
+    // the keyboard and puts the grid back in view.
+    searchForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      activeQuery = searchInput ? searchInput.value.trim() : '';
+      render();
+      if (searchInput) { searchInput.blur(); }
+    });
+  }
+
+  // A reload can restore a typed value; start from whatever is in the box.
+  if (searchInput && searchInput.value.trim()) {
+    activeQuery = searchInput.value.trim();
+    render();
+  }
 
   /* ---------------- 8. Product quick view ---------------- */
   var pm = document.getElementById('productModal');
