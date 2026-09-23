@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Layaan Kitchen Masters — NSF-certified, HACCP-compliant commercial kitchen equipment and supplies for restaurants, hotels and catering businesses. Head office in Ragama, showroom in Dandugama, Ja-Ela. Island-wide delivery across Sri Lanka.">
+<meta name="description" content="Layaan Kitchen Masters — complete commercial kitchen solutions. We design, manufacture, supply and install commercial kitchen equipment and custom stainless-steel fabrication for hotels, restaurants, bakeries and food production facilities. 12+ years of experience. Head office in Ragama, showroom in Dandugama, Ja-Ela. Island-wide across Sri Lanka and international markets.">
 <meta name="theme-color" content="#5003C0">
-<title>Layaan Kitchen Masters — Compliance-Grade Commercial Kitchen Equipment</title>
+<title>Layaan Kitchen Masters — Complete Commercial Kitchen Solutions</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -899,6 +899,7 @@ h2{letter-spacing:-.025em;}
   .nav-links.open li:nth-child(2) a{transition-delay:.16s;}
   .nav-links.open li:nth-child(3) a{transition-delay:.22s;}
   .nav-links.open li:nth-child(4) a{transition-delay:.28s;}
+  .nav-links.open li:nth-child(5) a{transition-delay:.34s;}
   .nav-links a::after{left:1.1rem;bottom:.7rem;transform:scaleX(0);}
   .nav-links a.active{background:rgba(255,213,30,.18);color:#fff;}
   .nav-links a.active::after{transform:scaleX(1);}
@@ -1351,6 +1352,151 @@ body.modal-open{overflow:hidden;}
   .quote-direct{flex-direction:column;align-items:flex-start;gap:.5rem;}
 }
 
+
+/* ---------- 10. Process timeline, industries and global reach ---------- */
+.process-timeline-wrap{
+  --pt-gutter:clamp(78px,7vw,108px);
+  --pt-dot:clamp(52px,4.4vw,62px);
+  position:relative;margin-top:clamp(2.5rem,4vw,3.75rem);
+}
+.pt-track{
+  position:absolute;top:0;bottom:0;left:50%;width:4px;transform:translateX(-50%);
+  background:rgba(80,3,192,.12);border-radius:var(--pill);
+}
+.pt-fill{
+  position:relative;display:block;width:100%;height:0;border-radius:var(--pill);
+  background:linear-gradient(180deg,var(--accent-gold),var(--gold),var(--magenta),var(--purple));
+  box-shadow:0 0 16px rgba(255,213,30,.4);will-change:height;
+}
+/* the glowing head that travels down the rail while the section is in play */
+.pt-fill::after{
+  content:"";position:absolute;left:50%;bottom:0;width:13px;height:13px;border-radius:50%;
+  transform:translate(-50%,50%);background:var(--yellow);opacity:0;
+  box-shadow:0 0 0 6px rgba(255,213,30,.16),0 0 20px 5px rgba(255,213,30,.5);
+  transition:opacity .35s ease;
+}
+.pt-track.is-live .pt-fill::after{opacity:1;animation:ptHead 1.9s ease-in-out infinite;}
+@keyframes ptHead{0%,100%{box-shadow:0 0 0 5px rgba(255,213,30,.14),0 0 16px 4px rgba(255,213,30,.45);}50%{box-shadow:0 0 0 9px rgba(255,213,30,.08),0 0 26px 7px rgba(255,213,30,.62);}}
+
+.process-timeline{list-style:none;margin:0;padding:0;position:relative;}
+.process-step{
+  position:relative;display:grid;align-items:center;
+  grid-template-columns:1fr var(--pt-gutter) 1fr;
+}
+.process-step + .process-step{margin-top:clamp(1.5rem,3vw,2.75rem);}
+
+.ps-num{
+  grid-area:1/2/2/3;justify-self:center;position:relative;z-index:2;
+  display:inline-flex;align-items:center;justify-content:center;
+  width:var(--pt-dot);height:var(--pt-dot);border-radius:50%;
+  font-family:'Space Grotesk',system-ui,sans-serif;font-weight:700;
+  font-size:clamp(.95rem,.85rem + .25vw,1.1rem);font-variant-numeric:tabular-nums;
+  background:#fff;color:var(--purple);border:2px solid rgba(80,3,192,.16);
+  box-shadow:0 6px 18px rgba(80,3,192,.1);
+  transition:transform .55s var(--ease),background .5s ease,color .5s ease,
+             border-color .5s ease,box-shadow .5s ease,opacity .5s ease;
+}
+.ps-num::before{
+  content:"";position:absolute;inset:-7px;border-radius:50%;
+  border:2px solid var(--yellow);opacity:0;transform:scale(.82);
+}
+.process-step.is-active .ps-num{
+  background:var(--grad-a);color:#fff;border-color:rgba(255,213,30,.6);
+  box-shadow:0 12px 28px rgba(80,3,192,.34),0 0 0 6px rgba(255,213,30,.13);
+  transform:scale(1.09);
+}
+.process-step.is-active .ps-num::before{animation:ptPulse 2.6s var(--ease) infinite;}
+@keyframes ptPulse{0%{opacity:.7;transform:scale(.86);}70%{opacity:0;transform:scale(1.55);}100%{opacity:0;transform:scale(1.55);}}
+
+.ps-body{
+  grid-area:1/1/2/2;position:relative;text-align:right;
+  margin-right:clamp(.5rem,1.4vw,1.35rem);
+  padding:clamp(1.35rem,1.9vw,1.85rem) clamp(1.25rem,1.7vw,1.7rem);
+  background:#fff;border:1px solid rgba(80,3,192,.1);border-radius:18px;
+  box-shadow:0 14px 34px rgba(80,3,192,.07);
+}
+.process-step:nth-child(even) .ps-body{
+  grid-area:1/3/2/4;text-align:left;margin-right:0;margin-left:clamp(.5rem,1.4vw,1.35rem);
+}
+/* gold edge that draws down the card as the step lights up */
+.ps-body::before{
+  content:"";position:absolute;top:0;bottom:0;right:0;width:3px;border-radius:0 18px 18px 0;
+  background:linear-gradient(180deg,var(--accent-gold),var(--gold));
+  transform:scaleY(0);transform-origin:top;transition:transform .65s var(--ease) .12s;
+}
+.process-step:nth-child(even) .ps-body::before{right:auto;left:0;border-radius:18px 0 0 18px;}
+.process-step.is-active .ps-body::before{transform:scaleY(1);}
+.ps-body h3{margin:0 0 .5rem;font-size:clamp(1.02rem,.95rem + .25vw,1.18rem);color:var(--purple);}
+.ps-body p{margin:0;font-size:.93rem;color:var(--muted-light);}
+
+/* Entrance is only armed once the script is driving the rail, so a blocked
+   script can never leave the steps invisible. */
+.pt-ready .ps-num{opacity:0;transform:scale(.55);}
+.pt-ready .process-step.is-active .ps-num{opacity:1;}
+.pt-ready .ps-body{
+  opacity:0;transform:translateX(42px);
+  transition:opacity .75s var(--ease),transform .75s var(--ease),box-shadow .4s ease;
+}
+.pt-ready .process-step:nth-child(even) .ps-body{transform:translateX(-42px);}
+.pt-ready .process-step.is-active .ps-body{opacity:1;transform:none;}
+
+.industry-chips{
+  list-style:none;margin:clamp(2rem,3vw,3rem) 0 0;padding:0;
+  display:flex;flex-wrap:wrap;justify-content:center;gap:.75rem clamp(.65rem,1vw,1rem);
+}
+.industry-chips li{
+  padding:.7rem 1.35rem;border-radius:var(--pill);
+  border:1px solid rgba(255,213,30,.28);background:rgba(255,255,255,.05);
+  color:#fff;font-family:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-size:.92rem;letter-spacing:.02em;
+  opacity:0;transform:translateY(16px) scale(.92);
+  transition:opacity .55s var(--ease),transform .55s var(--ease),
+             background-color .3s ease,border-color .3s ease;
+}
+.industry-chips.is-visible li{opacity:1;transform:none;}
+.industry-chips.is-visible li:nth-child(1){transition-delay:.04s;}
+.industry-chips.is-visible li:nth-child(2){transition-delay:.1s;}
+.industry-chips.is-visible li:nth-child(3){transition-delay:.16s;}
+.industry-chips.is-visible li:nth-child(4){transition-delay:.22s;}
+.industry-chips.is-visible li:nth-child(5){transition-delay:.28s;}
+.industry-chips.is-visible li:nth-child(6){transition-delay:.34s;}
+.industry-chips.is-visible li:nth-child(7){transition-delay:.4s;}
+.industry-chips.is-visible li:nth-child(8){transition-delay:.46s;}
+.section--dark .industry-note{
+  margin:clamp(2rem,3vw,2.75rem) auto 0;max-width:52ch;text-align:center;
+  font-size:.94rem;letter-spacing:.04em;color:rgba(240,240,240,.66);
+}
+
+.values-cta{margin:clamp(2rem,3vw,2.75rem) 0 0;text-align:center;}
+.hero-meta b.hm-word{font-size:1.28rem;}
+
+@media (hover:hover) and (pointer:fine){
+  .ps-body{transition:opacity .75s var(--ease),transform .75s var(--ease),box-shadow .4s ease;}
+  .process-step.is-active .ps-body:hover{box-shadow:0 22px 48px rgba(80,3,192,.16);}
+  .industry-chips.is-visible li:hover{
+    background:rgba(255,213,30,.14);border-color:rgba(255,213,30,.5);transform:translateY(-4px);
+  }
+}
+@media (max-width:899px){
+  .process-timeline-wrap{--pt-gutter:clamp(58px,14vw,76px);}
+  .pt-track{left:calc(var(--pt-gutter) / 2);}
+  .process-step{grid-template-columns:var(--pt-gutter) 1fr;}
+  .ps-num{grid-area:1/1/2/2;}
+  .ps-body,.process-step:nth-child(even) .ps-body{
+    grid-area:1/2/2/3;text-align:left;margin-left:clamp(.5rem,2vw,1rem);margin-right:0;
+  }
+  .ps-body::before,.process-step:nth-child(even) .ps-body::before{
+    right:auto;left:0;border-radius:18px 0 0 18px;
+  }
+  .pt-ready .ps-body,.pt-ready .process-step:nth-child(even) .ps-body{transform:translateX(-26px);}
+  .pt-ready .process-step.is-active .ps-body{transform:none;}
+}
+@media (max-width:767px){
+  .hero-meta b.hm-word{font-size:1.1rem;}
+  .industry-chips{gap:.6rem;}
+  .industry-chips li{padding:.6rem 1.05rem;font-size:.86rem;}
+}
+
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto;}
   *,*::before,*::after{
@@ -1369,6 +1515,10 @@ body.modal-open{overflow:hidden;}
   .pre-mark::after,.pre-bar,.pre-pct{opacity:1 !important;}
   .p-media::before{display:none !important;}
   .pm-panel{transform:none !important;}
+  .pt-ready .ps-num,.pt-ready .ps-body{opacity:1 !important;transform:none !important;}
+  .ps-body::before{transform:scaleY(1) !important;}
+  .industry-chips li{opacity:1 !important;transform:none !important;}
+  .ps-num::before,.pt-fill::after{animation:none !important;}
   .hero::before{animation:none !important;background-position:50% 50% !important;}
   .btn:hover,.filter-btn:hover,.map-tab:hover,.product-card:hover,.feature-card:hover,.value-card:hover,.socials a:hover{transform:none !important;}
   .map-card,.map-card.is-swapping{transition:none !important;opacity:1 !important;}
@@ -1450,11 +1600,11 @@ body.modal-open{overflow:hidden;}
 <a class="skip-link" href="#main">Skip to main content</a>
 
 <!-- ======================= HEADER / NAV ======================= -->
-<div class="utility-bar" aria-label="Contact and certification summary">
+<div class="utility-bar" aria-label="Contact and company summary">
   <div class="container utility-inner">
     <span class="utility-item"><span class="u-ico" aria-hidden="true">&#128205;</span> No. 111/4, Thewatte Road, Ragama</span>
     <a class="utility-item" href="tel:+94777868805"><span class="u-ico" aria-hidden="true">&#128222;</span> +94 77 786 8805</a>
-    <span class="utility-note">ISO 22000 &middot; NSF International &middot; HACCP</span>
+    <span class="utility-note">12+ Years Experience &middot; Island-Wide &middot; International Projects</span>
   </div>
 </div>
 
@@ -1475,6 +1625,7 @@ body.modal-open{overflow:hidden;}
         <li><a href="#about" class="nav-link">About Us</a></li>
         <li><a href="#profile" class="nav-link">Company Profile</a></li>
         <li><a href="#products" class="nav-link">Products</a></li>
+        <li><a href="#process" class="nav-link">Our Process</a></li>
       </ul>
     </div>
   </nav>
@@ -1505,21 +1656,20 @@ body.modal-open{overflow:hidden;}
     </video>
     <div class="container hero-inner">
       <div class="hero-copy">
-        <span class="hero-badge"><span class="dot" aria-hidden="true"></span> NSF &amp; HACCP certified supplier since 2011</span>
         <h1>
-          <span class="line"><span>Compliance-Ready</span></span>
-          <span class="line"><span><em>Equipment</em> for Every</span></span>
-          <span class="line"><span>Commercial Kitchen</span></span>
+          <span class="line"><span>Engineering</span></span>
+          <span class="line"><span><em>Better</em> Commercial</span></span>
+          <span class="line"><span>Kitchens</span></span>
         </h1>
-        <p class="hero-sub">Trusted by 65 restaurants and hotels. NSF-certified, HACCP-compliant kitchen supplies delivered to your door.</p>
+        <p class="hero-sub">From concept to completion, we design, manufacture, supply and install complete commercial kitchen solutions built around quality, efficiency, durability and professional performance.</p>
         <div class="hero-actions">
-          <a href="#products" class="btn btn--green" aria-label="View certified kitchen products">View Products</a>
-          <a href="#profile" class="btn btn--ghost" aria-label="View the Layaan Kitchen Masters company profile">Company Profile</a>
+          <a href="#products" class="btn btn--green" aria-label="View our commercial kitchen products">View Our Products</a>
+          <a href="#quote" class="btn btn--ghost" aria-label="Request a quote from Layaan Kitchen Masters">Get a Quote</a>
         </div>
         <div class="hero-meta">
-          <div><b>24hr</b><span>Colombo dispatch</span></div>
-          <div><b>1,200+</b><span>Audit-ready SKUs</span></div>
-          <div><b>99%</b><span>Audit pass rate</span></div>
+          <div><b>12+</b><span>Years of experience</span></div>
+          <div><b class="hm-word">Island-Wide</b><span>Client network</span></div>
+          <div><b class="hm-word">International</b><span>Projects &amp; markets</span></div>
         </div>
       </div>
     </div>
@@ -1537,23 +1687,23 @@ body.modal-open{overflow:hidden;}
       <div class="grid-4" data-stagger>
         <article class="card feature-card reveal">
           <div class="icon-circle f1" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M12 2.6 4.6 5.8v5.3c0 4.4 3 8.5 7.4 9.8 4.4-1.3 7.4-5.4 7.4-9.8V5.8Z"/><path d="m8.9 11.9 2.2 2.2 4-4.6"/></svg></div>
-          <h3>Fully Certified Equipment</h3>
-          <p>Every SKU ships with NSF or HACCP documentation your auditor can file on the spot.</p>
+          <h3>12+ Years of Experience</h3>
+          <p>Over a decade building kitchens that perform in demanding professional environments.</p>
         </article>
         <article class="card feature-card reveal">
           <div class="icon-circle f2" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M10 17h4V5H2v12h3"/><path d="M20 17h2v-3.34a4 4 0 0 0-1.17-2.83L19 9h-5v8h1"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg></div>
-          <h3>Island-Wide Delivery</h3>
-          <p>Next-day dispatch to Colombo metro and scheduled routes to all nine provinces.</p>
+          <h3>Island-Wide Client Network</h3>
+          <p>A client base built right across Sri Lanka, with delivery and project support in every province.</p>
         </article>
         <article class="card feature-card reveal">
-          <div class="icon-circle f3" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="m15 5 6.3 6.3a2.4 2.4 0 0 1 0 3.4L17 19"/><path d="M9.59 5.59A2 2 0 0 0 8.17 5H3a1 1 0 0 0-1 1v5.17a2 2 0 0 0 .59 1.42l5.7 5.7a2.43 2.43 0 0 0 3.42 0l3.58-3.58a2.43 2.43 0 0 0 0-3.42Z"/><circle cx="6.4" cy="9.4" r="1.05"/></svg></div>
-          <h3>Bulk Order Discounts</h3>
-          <p>Tiered contract pricing for multi-outlet groups, hotel chains and catering fleets.</p>
+          <div class="icon-circle f3" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="m12 2.8 9 4.6-9 4.6-9-4.6Z"/><path d="m3 12.4 9 4.6 9-4.6"/><path d="m3 16.9 9 4.6 9-4.6"/></svg></div>
+          <h3>Complete Kitchen Solutions</h3>
+          <p>Design, manufacture, supply and installation handled end to end by one team.</p>
         </article>
         <article class="card feature-card reveal">
           <div class="icon-circle f4" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94Z"/></svg></div>
-          <h3>After-Sales Support</h3>
-          <p>Calibration, replacement parts and audit-prep guidance from our in-house team.</p>
+          <h3>Custom Stainless-Steel Fabrication</h3>
+          <p>Workstations, counters, sinks, tables and racks built around your space and workflow.</p>
         </article>
       </div>
     </div>
@@ -1571,13 +1721,13 @@ body.modal-open{overflow:hidden;}
     <div class="about-grid">
       <div class="about-copy">
         <div class="reveal">
-          <p>Layaan Kitchen Masters was founded in 2011 after our team spent years watching excellent kitchens fail routine inspections for avoidable reasons &mdash; an uncalibrated probe, a storage rack that was never food-grade, a sanitiser with no traceable batch record. Compliance-grade supply simply was not available locally without a long import wait, so we built the supply chain that closed that gap.</p>
+          <p>Layaan Kitchen Masters has spent more than 12 years in the commercial kitchen industry, and that time has taught us what it takes to create kitchens that perform in demanding professional environments. We design, manufacture, supply and install commercial kitchen equipment and customised stainless-steel solutions for businesses across Sri Lanka and international markets.</p>
         </div>
         <div class="reveal">
-          <p>Today we combine two disciplines under one roof. Our food safety side is led by certified HACCP practitioners and former hotel QA managers who know exactly what an auditor opens first. Our supply chain side runs direct relationships with NSF and ISO 22000 certified manufacturers, so the documentation arrives with the pallet instead of six weeks later.</p>
+          <p>From a single piece of equipment to a complete kitchen project, our team brings together industry experience, technical knowledge, quality manufacturing and professional project coordination. Whether you are opening a restaurant, developing a hotel, expanding a bakery or establishing a large-scale food service operation, we provide the equipment and solutions you need.</p>
         </div>
         <div class="reveal">
-          <p>Our mission is simple: make every commercial kitchen we serve audit-ready on any given day, without warning. That means certified products, clear paperwork, honest lead times and a team that picks up the phone when a freezer log goes out of range at 11pm.</p>
+          <p>Every commercial kitchen is different. We develop solutions around your space, workflow, production capacity, hygiene requirements and operational needs, so that your kitchen works efficiently from the first day of service and keeps working for years after it.</p>
         </div>
 
       </div>
@@ -1586,26 +1736,6 @@ body.modal-open{overflow:hidden;}
         <div class="media-frame">
           <img src="assets/modern-stainless-steel-kitchen.jpg" alt="Modern stainless steel commercial kitchen with prep counters and extraction hoods" loading="lazy" decoding="async" width="4096" height="2800">
         </div>
-      </div>
-    </div>
-
-    <!-- Stats counter -->
-    <div class="stats-row reveal" id="stats" aria-label="Company performance at a glance">
-      <div class="stat">
-        <b data-count="65" data-suffix="">0</b>
-        <span>Clients Served</span>
-      </div>
-      <div class="stat">
-        <b data-count="1200" data-suffix="+">0</b>
-        <span>Products</span>
-      </div>
-      <div class="stat">
-        <b data-count="15" data-suffix="+">0</b>
-        <span>Years Experience</span>
-      </div>
-      <div class="stat">
-        <b data-count="99" data-suffix="%">0</b>
-        <span>Audit Pass Rate</span>
       </div>
     </div>
   </div>
@@ -1617,38 +1747,67 @@ body.modal-open{overflow:hidden;}
     <div class="section-head reveal">
       <span class="eyebrow"><span class="eyebrow-num">03</span>At a glance</span>
       <h2 class="underline-gold">Company Profile</h2>
+      <p class="lead">Layaan Kitchen Masters designs, manufactures, supplies and installs commercial kitchen equipment and customised stainless-steel solutions &mdash; 12+ years in the industry, a client network that reaches across Sri Lanka and project experience in international markets.</p>
     </div>
 
-    <!-- Values -->
+    <!-- Products &amp; solutions -->
     <div class="values-head reveal">
-      <span class="eyebrow">What we stand for</span>
-      <h2 class="underline-gold">Our Values</h2>
+      <span class="eyebrow">What we offer</span>
+      <h2 class="underline-gold">Everything For Your Commercial Kitchen</h2>
+      <p class="lead">One partner. Complete solutions. Whether you are opening a restaurant, developing a hotel, expanding a bakery or establishing a large-scale food service operation, we provide the equipment and solutions you need.</p>
     </div>
 
-    <div class="grid-3" data-stagger>
+    <div class="grid-4" data-stagger>
       <article class="card value-card reveal">
-        <div class="icon-circle v1" aria-hidden="true">&#127919;</div>
-        <h3>Quality Without Compromise</h3>
-        <p>We stock only what we would put in our own kitchens. If a product cannot show its certification, it does not enter our catalogue.</p>
+        <div class="icon-circle v1" aria-hidden="true">&#127859;</div>
+        <h3>Commercial Kitchen Equipment</h3>
+        <p>Professional equipment built for demanding kitchen environments.</p>
       </article>
       <article class="card value-card reveal">
-        <div class="icon-circle v2" aria-hidden="true">&#129309;</div>
-        <h3>Customer-First Service</h3>
-        <p>Real people, real response times. Every account gets a named contact who knows your site, your menu and your inspection cycle.</p>
+        <div class="icon-circle v2" aria-hidden="true">&#128295;</div>
+        <h3>Stainless Steel Fabrication</h3>
+        <p>Custom-built stainless-steel workstations, counters, sinks, tables, racks and more.</p>
       </article>
       <article class="card value-card reveal">
-        <div class="icon-circle v3" aria-hidden="true">&#127807;</div>
-        <h3>Sustainable Sourcing</h3>
-        <p>Recyclable packaging, refill-first chemical programmes and suppliers audited for ethical labour and responsible manufacturing.</p>
+        <div class="icon-circle v3" aria-hidden="true">&#128293;</div>
+        <h3>Cooking Equipment</h3>
+        <p>Professional cooking solutions designed for efficiency and performance.</p>
+      </article>
+      <article class="card value-card reveal">
+        <div class="icon-circle v1" aria-hidden="true">&#10052;&#65039;</div>
+        <h3>Refrigeration</h3>
+        <p>Reliable refrigeration and cold-storage solutions for commercial operations.</p>
+      </article>
+      <article class="card value-card reveal">
+        <div class="icon-circle v2" aria-hidden="true">&#129360;</div>
+        <h3>Bakery &amp; Pastry Equipment</h3>
+        <p>Specialised equipment for bakeries, caf&eacute;s, hotels and food production.</p>
+      </article>
+      <article class="card value-card reveal">
+        <div class="icon-circle v3" aria-hidden="true">&#128298;</div>
+        <h3>Food Preparation Equipment</h3>
+        <p>Practical solutions designed to improve kitchen workflow.</p>
+      </article>
+      <article class="card value-card reveal">
+        <div class="icon-circle v1" aria-hidden="true">&#128452;&#65039;</div>
+        <h3>Storage &amp; Shelving</h3>
+        <p>Efficient storage systems designed for professional kitchens.</p>
+      </article>
+      <article class="card value-card reveal">
+        <div class="icon-circle v2" aria-hidden="true">&#128168;</div>
+        <h3>Exhaust &amp; Ventilation</h3>
+        <p>Commercial ventilation solutions for safe and efficient kitchen environments.</p>
       </article>
     </div>
+
+    <p class="values-cta reveal"><a href="#products" class="btn btn--green">Explore All Products</a></p>
 
       <!-- ===================== LOCATION MAP ===================== -->
       <div class="map-block">
         <div class="map-head reveal">
           <span class="eyebrow">Find us</span>
           <h3 class="map-title">Visit Our Facilities</h3>
-          <p class="lead">Head office, showroom and temperature-mapped distribution operate across two sites. Pick a location to see its address, hours and directions. Trade visits welcome by appointment.</p>
+          <p class="lead">Our head office and our showroom operate across two sites. Pick a location to see its address, hours and directions. Trade visits are welcome by appointment.</p>
         </div>
 
         <!-- Tabs are generated from BUSINESS_LOCATIONS at the bottom of this
@@ -1700,7 +1859,7 @@ body.modal-open{overflow:hidden;}
     <div class="section-head center reveal">
       <span class="eyebrow"><span class="eyebrow-num">04</span>Catalogue</span>
       <h2 class="underline-gold">Our Products</h2>
-      <p class="lead">Everything your kitchen needs to pass every audit.</p>
+      <p class="lead">Commercial kitchen equipment and customised stainless-steel solutions, built for professional performance.</p>
     </div>
 
     <div class="filter-bar reveal" role="group" aria-label="Filter products by category">
@@ -1710,6 +1869,7 @@ body.modal-open{overflow:hidden;}
       <button class="filter-btn" aria-pressed="false" aria-controls="productGrid" data-filter="sinks">Sinks &amp; Tabling</button>
       <button class="filter-btn" aria-pressed="false" aria-controls="productGrid" data-filter="display">Display Counters</button>
       <button class="filter-btn" aria-pressed="false" aria-controls="productGrid" data-filter="ventilation">Ventilation</button>
+      <button class="filter-btn" aria-pressed="false" aria-controls="productGrid" data-filter="refrigeration">Refrigeration</button>
     </div>
 
     <div class="product-grid" id="productGrid" data-stagger role="region" aria-label="Product catalogue" aria-live="polite">
@@ -2248,10 +2408,11 @@ body.modal-open{overflow:hidden;}
            Island extraction canopy. First product in the Ventilation
            category. Double sided - filters and lights run down both faces -
            which is what makes it an island rather than a wall canopy.
-           No item code supplied yet. Holding copy as with the rest.
+           Holding copy as with the rest.
            ------------------------------------------------------------------ -->
-      <article class="product-card reveal" data-lead="Available on request" data-specs="Configuration::Double-sided island canopy|Filters::Stainless baffle filters, lift out for washing|Lighting::Recessed downlights along both faces|Drainage::Perimeter grease gutter|Body::Stainless steel throughout|Suits::Cooking suites set away from a wall" data-category="ventilation" data-images="assets/products/lk-canopy-island-1.webp::Layaan double-sided island extraction canopy with stainless baffle filters, recessed downlights and a perimeter grease gutter">
+      <article class="product-card reveal" data-sku="LK-TE-DI-2440" data-lead="Available on request" data-specs="Configuration::Double-sided island canopy|Filters::Stainless baffle filters, lift out for washing|Lighting::Recessed downlights along both faces|Drainage::Perimeter grease gutter|Body::Stainless steel throughout|Suits::Cooking suites set away from a wall" data-category="ventilation" data-images="assets/products/lk-canopy-island-1.webp::Layaan double-sided island extraction canopy with stainless baffle filters, recessed downlights and a perimeter grease gutter">
         <div class="p-media p-media--photo">
+          <span class="p-badge">LK-TE-DI-2440</span>
           <div class="p-media-inner">
             <img src="assets/products/lk-canopy-island-1.webp" width="1024" height="750" loading="lazy" decoding="async"
                  alt="Layaan double-sided island extraction canopy with stainless baffle filters, recessed downlights and a perimeter grease gutter">
@@ -2275,9 +2436,9 @@ body.modal-open{overflow:hidden;}
            the way it is on the island unit.
            Holding copy as with the rest.
            ------------------------------------------------------------------ -->
-      <article class="product-card reveal" data-sku="LK-TE-WM-2440" data-lead="Available on request" data-specs="Configuration::Single-sided wall canopy|Filters::Stainless baffle filters, lift out for washing|Drainage::Grease gutter along the front edge|Body::Stainless steel throughout|Mounting::Fixed back to the wall|Suits::Ranges and suites set against a wall" data-category="ventilation" data-images="assets/products/lk-canopy-wall-1.webp::Layaan wall-mounted extraction canopy with a single row of stainless baffle filters and a grease gutter along the front edge">
+      <article class="product-card reveal" data-sku="LK-TE-BSLH-2440" data-lead="Available on request" data-specs="Configuration::Single-sided wall canopy|Filters::Stainless baffle filters, lift out for washing|Drainage::Grease gutter along the front edge|Body::Stainless steel throughout|Mounting::Fixed back to the wall|Suits::Ranges and suites set against a wall" data-category="ventilation" data-images="assets/products/lk-canopy-wall-1.webp::Layaan wall-mounted extraction canopy with a single row of stainless baffle filters and a grease gutter along the front edge">
         <div class="p-media p-media--photo">
-          <span class="p-badge">LK-TE-WM-2440</span>
+          <span class="p-badge">LK-TE-BSLH-2440</span>
           <div class="p-media-inner">
             <img src="assets/products/lk-canopy-wall-1.webp" width="875" height="419" loading="lazy" decoding="async"
                  alt="Layaan wall-mounted extraction canopy with a single row of stainless baffle filters and a grease gutter along the front edge">
@@ -2294,36 +2455,525 @@ body.modal-open{overflow:hidden;}
         </div>
       </article>
 
+      <!-- ------------------------------------------------------------------
+           Four-tier storage rack. Filed under Sinks &amp; Tabling alongside
+           the wall shelf; if more shelving arrives, these two would justify
+           a Shelving category of their own.
+           Holding copy as with the rest.
+           ------------------------------------------------------------------ -->
+      <article class="product-card reveal" data-sku="LK-TE-S-1800" data-lead="Available on request" data-specs="Configuration::Four slatted tiers on a tubular frame|Shelves::Round bar slats, open for drainage and airflow|Frame::Tubular stainless uprights|Feet::Adjustable|Body::Stainless steel throughout|Suits::Dry stores, pot storage and walk-in chillers" data-category="sinks" data-images="assets/products/lk-rack-4tier-1.webp::Layaan four-tier stainless steel storage rack with open slatted shelves on a tubular frame">
+        <div class="p-media p-media--photo">
+          <span class="p-badge">LK-TE-S-1800</span>
+          <div class="p-media-inner">
+            <img src="assets/products/lk-rack-4tier-1.webp" width="352" height="378" loading="lazy" decoding="async"
+                 alt="Layaan four-tier stainless steel storage rack with open slatted shelves on a tubular frame">
+          </div>
+        </div>
+        <div class="p-body">
+          <span class="p-cat">Sinks &amp; Tabling</span>
+          <h3><button type="button" class="p-open">Four-Tier Storage Rack</button></h3>
+          <p>Four open slatted tiers on a tubular stainless frame &mdash; air and water pass straight through, so it suits chillers and wash-up stores.</p>
+          <div class="p-foot">
+            <span class="p-price">Price on request<small>contact us for a quotation</small></span>
+            <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ------------------------------------------------------------------
+           Five-tier perforated rack. Sits beside the LK-TE-S-1800 slatted
+           rack; perforated sheet rather than bar slats is the difference
+           that matters, so the copy leads on it.
+           Third shelving item in Sinks &amp; Tabling - worth splitting these
+           into a Shelving category.
+           Holding copy as with the rest.
+           ------------------------------------------------------------------ -->
+      <article class="product-card reveal" data-sku="LK-TE-C-1800" data-lead="Available on request" data-specs="Configuration::Five perforated tiers on a square tube frame|Shelves::Punched sheet, open for airflow and drainage|Frame::Square section stainless uprights|Feet::Adjustable|Body::Stainless steel throughout|Suits::Dry stores, chillers and bulk stock" data-category="sinks" data-images="assets/products/lk-rack-5tier-perf-1.webp::Layaan five-tier stainless steel shelving rack with perforated sheet shelves on a square tube frame">
+        <div class="p-media p-media--photo">
+          <span class="p-badge">LK-TE-C-1800</span>
+          <div class="p-media-inner">
+            <img src="assets/products/lk-rack-5tier-perf-1.webp" width="336" height="469" loading="lazy" decoding="async"
+                 alt="Layaan five-tier stainless steel shelving rack with perforated sheet shelves on a square tube frame">
+          </div>
+        </div>
+        <div class="p-body">
+          <span class="p-cat">Sinks &amp; Tabling</span>
+          <h3><button type="button" class="p-open">Five-Tier Perforated Rack</button></h3>
+          <p>Five punched-sheet tiers on a square stainless frame &mdash; still drains and breathes, but holds smaller items that drop straight through bar slats.</p>
+          <div class="p-foot">
+            <span class="p-price">Price on request<small>contact us for a quotation</small></span>
+            <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ------------------------------------------------------------------
+           Box-type wall canopy. Third canopy in Ventilation, so it is named
+           for its box profile to separate it from the LK-TE-BSLH-2440 wall
+           canopy, which is the sloped low-height type.
+           The supplied photograph is only 225x225 - by far the smallest in
+           the catalogue - so it is soft on the card and blurred in the quick
+           view. Wants a larger source.
+           Holding copy as with the rest.
+           ------------------------------------------------------------------ -->
+      <article class="product-card reveal" data-sku="LK-TE-WM-2440" data-lead="Available on request" data-specs="Configuration::Box canopy, single sided for wall mounting|Filters::Stainless baffle filters in a recessed bank|Profile::Flat top with a square box body|Body::Stainless steel throughout|Mounting::Fixed back to the wall|Suits::Ranges and fryers set against a wall" data-category="ventilation" data-images="assets/products/lk-canopy-box-1.webp::Layaan box-type wall extraction canopy with a flat top and stainless baffle filters set in a recessed bank">
+        <div class="p-media p-media--photo">
+          <span class="p-badge">LK-TE-WM-2440</span>
+          <div class="p-media-inner">
+            <img src="assets/products/lk-canopy-box-1.webp" width="225" height="156" loading="lazy" decoding="async"
+                 alt="Layaan box-type wall extraction canopy with a flat top and stainless baffle filters set in a recessed bank">
+          </div>
+        </div>
+        <div class="p-body">
+          <span class="p-cat">Ventilation</span>
+          <h3><button type="button" class="p-open">Box-Type Wall Canopy</button></h3>
+          <p>A square-profile wall canopy with a flat top and baffle filters set into a recessed bank across the underside.</p>
+          <div class="p-foot">
+            <span class="p-price">Price on request<small>contact us for a quotation</small></span>
+            <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ------------------------------------------------------------------
+           Single-sided island canopy. Counterpart to the LK-TE-DI-2440,
+           which carries filters on both faces; this one has a single bank.
+           The sloped, finished-all-round profile is what marks it as an
+           island rather than a wall unit.
+           Photograph is 260x260 - small, like the LK-TE-WM-2440 - so it is
+           soft in the quick view. Wants a larger source.
+           Holding copy as with the rest.
+           ------------------------------------------------------------------ -->
+      <article class="product-card reveal" data-sku="LK-TE-SI-2440" data-lead="Available on request" data-specs="Configuration::Island canopy with a single filter bank|Filters::One run of stainless baffle filters|Profile::Sloped on all four sides|Finish::Clad on every face for an exposed position|Body::Stainless steel throughout|Suits::Island suites that extract from one side" data-category="ventilation" data-images="assets/products/lk-canopy-single-island-1.webp::Layaan single-sided island extraction canopy, sloped and finished on all four faces with one bank of stainless baffle filters">
+        <div class="p-media p-media--photo">
+          <span class="p-badge">LK-TE-SI-2440</span>
+          <div class="p-media-inner">
+            <img src="assets/products/lk-canopy-single-island-1.webp" width="260" height="156" loading="lazy" decoding="async"
+                 alt="Layaan single-sided island extraction canopy, sloped and finished on all four faces with one bank of stainless baffle filters">
+          </div>
+        </div>
+        <div class="p-body">
+          <span class="p-cat">Ventilation</span>
+          <h3><button type="button" class="p-open">Single-Sided Island Canopy</button></h3>
+          <p>An island canopy finished on all four faces with a single bank of baffle filters &mdash; for a suite that vents from one side only.</p>
+          <div class="p-foot">
+            <span class="p-price">Price on request<small>contact us for a quotation</small></span>
+            <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ------------------------------------------------------------------
+           Cake display counter. The three photographs are build options of
+           one unit, not three products: curved front in black, square front
+           in black, square front in white.
+           Unlike the rest of the catalogue these are photographs on a studio
+           floor rather than cut-outs, so they carry their own background.
+           Running them through the same background remover used elsewhere
+           would bring them into line.
+           No item code supplied yet. Holding copy as with the rest.
+           ------------------------------------------------------------------ -->
+      <article class="product-card reveal" data-lead="Available on request" data-specs="Configuration::Three display tiers behind sealed glass|Glass::Curved or square front, to choice|Finish::Black or white base panels|Lighting::LED strip to each tier|Access::Sliding doors on the server side|Suits::Cakes, pastries and chilled desserts" data-category="display" data-images="assets/products/lk-cake-display-1.webp::Layaan refrigerated cake display counter with a curved glass front and black base panels, three lit tiers of cakes and pastries inside|assets/products/lk-cake-display-2.webp::The same display counter built with a square glass front and black base panels|assets/products/lk-cake-display-3.webp::The same display counter built with a square glass front and white base panels">
+        <div class="p-media p-media--photo">
+          <div class="p-media-inner">
+            <img src="assets/products/lk-cake-display-1.webp" width="725" height="715" loading="lazy" decoding="async"
+                 alt="Layaan refrigerated cake display counter with a curved glass front and black base panels, three lit tiers of cakes and pastries inside">
+          </div>
+        </div>
+        <div class="p-body">
+          <span class="p-cat">Display Counters</span>
+          <h3><button type="button" class="p-open">Cake Display Counter</button></h3>
+          <p>Three lit tiers behind sealed glass, with sliding access from the server side &mdash; built with a curved or square front, in black or white.</p>
+          <div class="p-foot">
+            <span class="p-price">Price on request<small>contact us for a quotation</small></span>
+            <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ------------------------------------------------------------------
+           Hand wash trough. NOTE ON THE IMAGE: the supplied photograph is
+           tiled with a third party watermark reading "COMMERCIAL KITCHEN
+           EQUIPMENT SRI LANKA", over the steel as well as the backdrop. It
+           is left as supplied rather than retouched. The backdrop is a grey
+           studio sweep, not white, so it could not be trimmed the way the
+           other photographs were - only cropped in. A clean original would
+           replace both problems at once.
+           Holding copy as with the rest.
+           ------------------------------------------------------------------ -->
+      <article class="product-card reveal" data-sku="LK-TE-HW-1220" data-lead="Available on request" data-specs="Configuration::One continuous trough, no divisions|Splashback::Integral rear upstand|Waste::Centre outlet|Mounting::Wall hung on end brackets|Body::Stainless steel throughout|Suits::Staff hand wash points and wash-up areas" data-category="sinks" data-images="assets/products/lk-trough-handwash-1.webp::Layaan wall-hung stainless steel hand wash trough with an integral rear splashback and a centre waste outlet">
+        <div class="p-media p-media--photo">
+          <span class="p-badge">LK-TE-HW-1220</span>
+          <div class="p-media-inner">
+            <img src="assets/products/lk-trough-handwash-1.webp" width="498" height="348" loading="lazy" decoding="async"
+                 alt="Layaan wall-hung stainless steel hand wash trough with an integral rear splashback and a centre waste outlet">
+          </div>
+        </div>
+        <div class="p-body">
+          <span class="p-cat">Sinks &amp; Tabling</span>
+          <h3><button type="button" class="p-open">Hand Wash Trough</button></h3>
+          <p>One continuous trough with an integral splashback and a centre waste, hung off the wall with no legs to clean around.</p>
+          <div class="p-foot">
+            <span class="p-price">Price on request<small>contact us for a quotation</small></span>
+            <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ------------------------------------------------------------------
+           Under-counter chiller. First product in Refrigeration, and the
+           first whose cooling is readable from the photograph - digital
+           thermostat on the front panel and a condenser grille at the end -
+           so the copy states it outright where the cake counter and the
+           servery counter only hint at it. Those two may belong here once
+           confirmed.
+           First LK-TH prefix in the catalogue; every other code is LK-TE.
+           Holding copy as with the rest.
+           ------------------------------------------------------------------ -->
+      <article class="product-card reveal" data-sku="LK-TH-UCC-1500" data-lead="Available on request" data-specs="Configuration::Two-door refrigerated counter|Controls::Digital thermostat on the front panel|Top::Stainless worktop, usable as bench space|Condenser::End mounted behind a ventilated grille|Mobility::Castor mounted|Suits::Cold storage under prep and service lines" data-category="refrigeration" data-images="assets/products/lk-chiller-undercounter-1.webp::Layaan two-door stainless steel under-counter refrigerated counter with a digital thermostat, condenser grille and castors">
+        <div class="p-media p-media--photo">
+          <span class="p-badge">LK-TH-UCC-1500</span>
+          <div class="p-media-inner">
+            <img src="assets/products/lk-chiller-undercounter-1.webp" width="449" height="277" loading="lazy" decoding="async"
+                 alt="Layaan two-door stainless steel under-counter refrigerated counter with a digital thermostat, condenser grille and castors">
+          </div>
+        </div>
+        <div class="p-body">
+          <span class="p-cat">Refrigeration</span>
+          <h3><button type="button" class="p-open">Two-Door Under-Counter Chiller</button></h3>
+          <p>A two-door refrigerated counter on castors, with a digital thermostat and a stainless top that works as bench space.</p>
+          <div class="p-foot">
+            <span class="p-price">Price on request<small>contact us for a quotation</small></span>
+            <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ------------------------------------------------------------------
+           Three-door under-counter chiller. Sibling of the UCC-1500, which
+           was renamed to "Two-Door" when this arrived so the pair reads by
+           door count rather than one being the generic.
+           PREFIX MISMATCH: this is LK-TE-UCC-1800 while the other is
+           LK-TH-UCC-1500. Same family, different prefix, and LK-TE is what
+           every other code in the catalogue uses - worth confirming which
+           is right.
+           Holding copy as with the rest.
+           ------------------------------------------------------------------ -->
+      <article class="product-card reveal" data-sku="LK-TE-UCC-1800" data-lead="Available on request" data-specs="Configuration::Three-door refrigerated counter|Controls::Digital thermostat on the front panel|Top::Stainless worktop, usable as bench space|Condenser::End mounted behind a ventilated grille|Mobility::Castor mounted|Suits::Cold storage under longer prep and service runs" data-category="refrigeration" data-images="assets/products/lk-chiller-undercounter-3door-1.webp::Layaan three-door stainless steel under-counter refrigerated counter with a digital thermostat, condenser grille and castors">
+        <div class="p-media p-media--photo">
+          <span class="p-badge">LK-TE-UCC-1800</span>
+          <div class="p-media-inner">
+            <img src="assets/products/lk-chiller-undercounter-3door-1.webp" width="447" height="301" loading="lazy" decoding="async"
+                 alt="Layaan three-door stainless steel under-counter refrigerated counter with a digital thermostat, condenser grille and castors">
+          </div>
+        </div>
+        <div class="p-body">
+          <span class="p-cat">Refrigeration</span>
+          <h3><button type="button" class="p-open">Three-Door Under-Counter Chiller</button></h3>
+          <p>The longer counter in the same range &mdash; three doors instead of two, on castors, with a stainless top that works as bench space.</p>
+          <div class="p-foot">
+            <span class="p-price">Price on request<small>contact us for a quotation</small></span>
+            <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ------------------------------------------------------------------
+           Two-door upright chiller. Third product in Refrigeration and the
+           first upright - the two UCC counters are under-bench, this one
+           stands full height, so the copy leads on footprint.
+           The unit carries a manufacturer badge in the photograph, as the
+           UCC-1500 does. Fine for a resold appliance, but worth knowing if
+           unbranded shots are preferred.
+           Holding copy as with the rest.
+           ------------------------------------------------------------------ -->
+      <article class="product-card reveal" data-sku="LK-TE-URC-2" data-lead="Available on request" data-specs="Configuration::Upright cabinet with two half-doors|Controls::Digital display on the condenser deck|Condenser::Top mounted, above the doors|Mobility::Castor mounted|Body::Stainless steel throughout|Suits::Bulk cold storage where floor space is tight" data-category="refrigeration" data-images="assets/products/lk-chiller-upright-2door-1.webp::Layaan two-door upright stainless steel refrigerated cabinet with a top-mounted condenser deck, digital display and castors">
+        <div class="p-media p-media--photo">
+          <span class="p-badge">LK-TE-URC-2</span>
+          <div class="p-media-inner">
+            <img src="assets/products/lk-chiller-upright-2door-1.webp" width="393" height="869" loading="lazy" decoding="async"
+                 alt="Layaan two-door upright stainless steel refrigerated cabinet with a top-mounted condenser deck, digital display and castors">
+          </div>
+        </div>
+        <div class="p-body">
+          <span class="p-cat">Refrigeration</span>
+          <h3><button type="button" class="p-open">Two-Door Upright Chiller</button></h3>
+          <p>A full-height reach-in on castors with two half-doors and the condenser up top &mdash; bulk cold storage in a single cabinet footprint.</p>
+          <div class="p-foot">
+            <span class="p-price">Price on request<small>contact us for a quotation</small></span>
+            <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ------------------------------------------------------------------
+           Gas rice steamer. Filed under Cooking Machines rather than Cooking
+           Ranges: it is a powered cabinet appliance like the drum wok cooker,
+           not an open-burner range.
+           The photograph shows the outside only, so tray capacity - the spec
+           a steamer is actually bought on - is deliberately absent.
+           Image is 196x337, small for the quick view.
+           Code to follow. Holding copy as with the rest.
+           ------------------------------------------------------------------ -->
+      <article class="product-card reveal" data-lead="Available on request" data-specs="Configuration::Upright steaming cabinet, single hinged door|Heating::Gas burner housed in the base|Controls::Valve and gauge on the burner compartment|Door::Insulated, full height with a lever handle|Mobility::Castor mounted|Suits::Bulk rice, dim sum and steamed dishes" data-category="machines" data-images="assets/products/lk-steamer-rice-1.webp::Layaan gas rice steamer cabinet in stainless steel, with an insulated hinged door and a gas burner compartment in the base, on castors">
+        <div class="p-media p-media--photo">
+          <div class="p-media-inner">
+            <img src="assets/products/lk-steamer-rice-1.webp" width="196" height="337" loading="lazy" decoding="async"
+                 alt="Layaan gas rice steamer cabinet in stainless steel, with an insulated hinged door and a gas burner compartment in the base, on castors">
+          </div>
+        </div>
+        <div class="p-body">
+          <span class="p-cat">Cooking Machines</span>
+          <h3><button type="button" class="p-open">Gas Rice Steamer Cabinet</button></h3>
+          <p>An insulated upright cabinet steamed by a gas burner in its base, on castors &mdash; for cooking rice and steamed dishes in bulk.</p>
+          <div class="p-foot">
+            <span class="p-price">Price on request<small>contact us for a quotation</small></span>
+            <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ------------------------------------------------------------------
+           Counter-top electric fryer. Filed under Cooking Ranges with the
+           other counter-top cooking appliances - the gas stove and the
+           induction hob - rather than Cooking Machines, which holds the
+           cabinet machines.
+           Code to follow. Holding copy as with the rest.
+           ------------------------------------------------------------------ -->
+      <article class="product-card reveal" data-lead="Available on request" data-specs="Configuration::Single tank with a wire mesh basket|Controls::Temperature dial with power and heat lights|Element::Swings up clear of the tank for draining|Basket::Wire mesh with an insulated handle|Body::Stainless steel counter-top housing|Suits::Chips, short eats and small fry stations" data-category="cooking" data-images="assets/products/lk-fryer-counter-1.webp::Layaan counter-top electric deep fryer with a single stainless tank, wire mesh basket, temperature dial and indicator lights">
+        <div class="p-media p-media--photo">
+          <div class="p-media-inner">
+            <img src="assets/products/lk-fryer-counter-1.webp" width="985" height="1000" loading="lazy" decoding="async"
+                 alt="Layaan counter-top electric deep fryer with a single stainless tank, wire mesh basket, temperature dial and indicator lights">
+          </div>
+        </div>
+        <div class="p-body">
+          <span class="p-cat">Cooking Ranges</span>
+          <h3><button type="button" class="p-open">Single-Tank Electric Fryer</button></h3>
+          <p>A single-tank electric fryer with a dial thermostat and indicator lights &mdash; the element swings up so the tank drains and wipes out clean.</p>
+          <div class="p-foot">
+            <span class="p-price">Price on request<small>contact us for a quotation</small></span>
+            <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ------------------------------------------------------------------
+           Twin-tank electric fryer. Sibling of the single-tank fryer, which
+           was renamed to "Single-Tank" when this arrived so the pair reads
+           by tank count rather than one being the generic.
+           Code to follow. Holding copy as with the rest.
+           ------------------------------------------------------------------ -->
+      <article class="product-card reveal" data-lead="Available on request" data-specs="Configuration::Two independent tanks, one basket each|Controls::A temperature dial and indicator lights per tank|Elements::Swing up clear of each tank for draining|Lids::One to each tank|Body::Stainless steel counter-top housing|Suits::Keeping fry types apart, or doubling output" data-category="cooking" data-images="assets/products/lk-fryer-counter-twin-1.webp::Layaan twin-tank counter-top electric fryer with two independently controlled tanks, two mesh baskets and a lid to each tank">
+        <div class="p-media p-media--photo">
+          <div class="p-media-inner">
+            <img src="assets/products/lk-fryer-counter-twin-1.webp" width="400" height="282" loading="lazy" decoding="async"
+                 alt="Layaan twin-tank counter-top electric fryer with two independently controlled tanks, two mesh baskets and a lid to each tank">
+          </div>
+        </div>
+        <div class="p-body">
+          <span class="p-cat">Cooking Ranges</span>
+          <h3><button type="button" class="p-open">Twin-Tank Electric Fryer</button></h3>
+          <p>Two separately controlled tanks in one counter-top body &mdash; run different oils side by side, or simply fry twice as much at once.</p>
+          <div class="p-foot">
+            <span class="p-price">Price on request<small>contact us for a quotation</small></span>
+            <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ------------------------------------------------------------------
+           Servery counter with glass display. Distinct from the Eight-Pan
+           Servery Counter above, which is an open-topped trolley; this is a
+           fixed run with a glazed case and a tray slide.
+           As with that one, no controls are visible in the photograph, so
+           the copy does not claim the wells are heated or chilled. Confirm
+           and the spec can say so.
+           Code to follow. Holding copy as with the rest.
+           ------------------------------------------------------------------ -->
+      <article class="product-card reveal" data-lead="Available on request" data-specs="Configuration::Gastronorm wells set into a counter run|Display::Square glazed case over the wells|Tray slide::Tubular rail along the customer face|Base::Banded stainless panels|Body::Stainless steel throughout|Suits::Canteen, buffet and cafeteria service lines" data-category="display" data-images="assets/products/lk-servery-glass-1.webp::Layaan servery counter with gastronorm wells set into the top, a glazed display case above and a tray slide along the customer side">
+        <div class="p-media p-media--photo">
+          <div class="p-media-inner">
+            <img src="assets/products/lk-servery-glass-1.webp" width="433" height="489" loading="lazy" decoding="async"
+                 alt="Layaan servery counter with gastronorm wells set into the top, a glazed display case above and a tray slide along the customer side">
+          </div>
+        </div>
+        <div class="p-body">
+          <span class="p-cat">Display Counters</span>
+          <h3><button type="button" class="p-open">Servery Counter with Glass Display</button></h3>
+          <p>Gastronorm wells set into a long counter under a glazed case, with a tray slide running the length of the customer side.</p>
+          <div class="p-foot">
+            <span class="p-price">Price on request<small>contact us for a quotation</small></span>
+            <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ------------------------------------------------------------------
+           Stock pot stove. Third single-burner unit in Cooking Ranges, so
+           it is named for its job rather than its burner count: it is the
+           low one, built so a tall pot still sits at working height. The
+           LK-TE-80 is a counter-top stove and the open-stand unit is a wok
+           well with a splashback.
+           Code to follow. Holding copy as with the rest.
+           ------------------------------------------------------------------ -->
+      <article class="product-card reveal" data-lead="Available on request" data-specs="Configuration::Single high-output ring burner|Support::Heavy cast spider trivet|Height::Low stand, sized so a tall pot still works|Controls::Front manifold with valves|Body::Stainless steel box section|Suits::Stock pots, large curry pans and bulk boiling" data-category="cooking" data-images="assets/products/lk-stockpot-stove-1.webp::Layaan low-height gas stock pot stove with a heavy cast spider trivet over a coiled ring burner and a front gas manifold">
+        <div class="p-media p-media--photo">
+          <div class="p-media-inner">
+            <img src="assets/products/lk-stockpot-stove-1.webp" width="389" height="327" loading="lazy" decoding="async"
+                 alt="Layaan low-height gas stock pot stove with a heavy cast spider trivet over a coiled ring burner and a front gas manifold">
+          </div>
+        </div>
+        <div class="p-body">
+          <span class="p-cat">Cooking Ranges</span>
+          <h3><button type="button" class="p-open">Gas Stock Pot Stove</button></h3>
+          <p>A heavy ring burner under a cast spider trivet, set low on purpose so a full stock pot still sits at a workable height.</p>
+          <div class="p-foot">
+            <span class="p-price">Price on request<small>contact us for a quotation</small></span>
+            <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ------------------------------------------------------------------
+           Service counter with gallery rail. IMAGE IS HAND MASKED: the
+           supplied photograph was a workshop shot - tiled floor, wall and a
+           neighbouring unit touching the right-hand rail. Tone-based
+           trimming could not separate it, so the silhouette was traced by
+           hand and everything outside filled white. Good at card size; the
+           polygon edges and the clipped feet show if you look closely, and
+           a proper cut-out would still be better.
+           Product name is read off the photograph and wants confirming.
+           Code to follow. Holding copy as with the rest.
+           ------------------------------------------------------------------ -->
+      <article class="product-card reveal" data-lead="Available on request" data-specs="Configuration::Clad counter with a galleried top|Rail::Tubular gallery on three sides|Front::Louvred stainless panels|Body::Welded stainless fabrication|Feet::Short adjustable feet|Suits::Service and dispense points where trays must not slide off" data-category="sinks" data-images="assets/products/lk-service-counter-1.webp::Layaan stainless steel service counter with a tubular gallery rail around three sides of the top and a louvred front">
+        <div class="p-media p-media--photo">
+          <div class="p-media-inner">
+            <img src="assets/products/lk-service-counter-1.webp" width="670" height="715" loading="lazy" decoding="async"
+                 alt="Layaan stainless steel service counter with a tubular gallery rail around three sides of the top and a louvred front">
+          </div>
+        </div>
+        <div class="p-body">
+          <span class="p-cat">Sinks &amp; Tabling</span>
+          <h3><button type="button" class="p-open">Service Counter with Gallery Rail</button></h3>
+          <p>A clad stainless counter with a tubular rail around three sides of the top, so nothing slides off the back or the ends.</p>
+          <div class="p-foot">
+            <span class="p-price">Price on request<small>contact us for a quotation</small></span>
+            <span class="p-view" aria-hidden="true">View details <span>&rarr;</span></span>
+          </div>
+        </div>
+      </article>
+
     </div>
 
     <p class="p-empty" id="productEmpty">No products in this category yet &mdash; talk to our team and we will source it for you.</p>
   </div>
 </section>
 
-<!-- ======================= 5. REQUEST A QUOTE ======================= -->
+<!-- ======================= 5. OUR PROCESS ======================= -->
+<section id="process" class="section section--light" aria-label="How we work">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow"><span class="eyebrow-num">05</span>How we work</span>
+      <h2 class="underline-gold">From Idea to Completion</h2>
+      <p class="lead">One team. One complete solution. From the first conversation to the day your kitchen opens for service.</p>
+    </div>
+
+    <!-- The rail is drawn by script 12 at the bottom of this file: it fills
+         as the section scrolls past and lights each number as it reaches it.
+         Without the script the steps simply read as a plain numbered list. -->
+    <div class="process-timeline-wrap" id="processTimeline">
+      <div class="pt-track" aria-hidden="true"><span class="pt-fill"></span></div>
+
+      <ol class="process-timeline">
+        <li class="process-step">
+          <span class="ps-num" aria-hidden="true">01</span>
+          <div class="ps-body">
+            <h3>Consultation</h3>
+            <p>We start by understanding your business, your requirements, your space and the goals of the project.</p>
+          </div>
+        </li>
+        <li class="process-step">
+          <span class="ps-num" aria-hidden="true">02</span>
+          <div class="ps-body">
+            <h3>Design &amp; Planning</h3>
+            <p>Our team develops practical layouts and equipment solutions built around the way your kitchen actually works.</p>
+          </div>
+        </li>
+        <li class="process-step">
+          <span class="ps-num" aria-hidden="true">03</span>
+          <div class="ps-body">
+            <h3>Manufacturing &amp; Supply</h3>
+            <p>We manufacture and supply commercial kitchen equipment and customised stainless-steel solutions.</p>
+          </div>
+        </li>
+        <li class="process-step">
+          <span class="ps-num" aria-hidden="true">04</span>
+          <div class="ps-body">
+            <h3>Installation</h3>
+            <p>Professional installation and project coordination bring the kitchen to life on site.</p>
+          </div>
+        </li>
+        <li class="process-step">
+          <span class="ps-num" aria-hidden="true">05</span>
+          <div class="ps-body">
+            <h3>Completion</h3>
+            <p>A complete, functional and professionally delivered commercial kitchen, ready for operation.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 6. WHO WE SERVE ======================= -->
+<section id="industries" class="section section--dark" aria-label="Industries we serve">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow"><span class="eyebrow-num">06</span>Who we serve</span>
+      <h2 class="underline-gold">Trusted Across Sri Lanka</h2>
+      <p class="lead">Over the past 12+ years Layaan Kitchen Masters has built a strong client base across Sri Lanka, working on projects that serve a wide range of commercial and professional environments.</p>
+    </div>
+
+    <ul class="industry-chips reveal" aria-label="Sectors we work with">
+        <li>Hotels</li>
+        <li>Restaurants</li>
+        <li>Caf&eacute;s</li>
+        <li>Bakeries</li>
+        <li>Catering Companies</li>
+        <li>Hospitals</li>
+        <li>Institutions</li>
+        <li>Food Production Facilities</li>
+    </ul>
+
+    <p class="industry-note reveal">Building long-term client relationships, one project at a time.</p>
+  </div>
+</section>
+
+<!-- ======================= 7. REQUEST A QUOTE ======================= -->
 <section id="quote" class="section section--light" aria-label="Request a quote">
   <div class="container">
     <div class="quote-layout">
 
       <div class="quote-intro">
         <div class="reveal">
-          <span class="eyebrow"><span class="eyebrow-num">05</span>Get in touch</span>
+          <span class="eyebrow"><span class="eyebrow-num">07</span>Let&rsquo;s build your kitchen</span>
           <h2 class="underline-gold">Request a Quote</h2>
-          <p class="lead">Tell us what your kitchen needs. We price per outlet, per contract or per pallet &mdash; and every quote arrives with the certification paperwork your auditor will ask for.</p>
+          <p class="lead">Whether you are planning a new restaurant, hotel, bakery, caf&eacute;, catering facility, institutional kitchen or a large-scale commercial project, our team is ready to help. Tell us what you need and we will turn it into a professional commercial kitchen solution.</p>
         </div>
 
         <ul class="quote-points reveal">
           <li>
             <span class="qp-ico" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M12 6.8V12l3.6 2.1"/></svg></span>
-            <span><b>One business day</b>Quotes returned Mon&ndash;Sat, with stock and lead times confirmed.</span>
+            <span><b>One business day</b>Quotes returned Mon&ndash;Sat, with specifications and lead times confirmed.</span>
           </li>
           <li>
             <span class="qp-ico" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8.2" r="3.7"/><path d="M5 19.4a7 7 0 0 1 14 0"/></svg></span>
-            <span><b>A named account manager</b>One contact who knows your site, your menu and your inspection cycle.</span>
+            <span><b>A named project contact</b>One person who knows your site, your layout and your timeline from start to finish.</span>
           </li>
           <li>
             <span class="qp-ico" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13.8 3.2H7.4A2.2 2.2 0 0 0 5.2 5.4v13.2a2.2 2.2 0 0 0 2.2 2.2h9.2a2.2 2.2 0 0 0 2.2-2.2V8.4z"/><path d="M13.8 3.2v5.2h5"/><path d="m9.2 14.6 1.9 1.9 3.7-3.7"/></svg></span>
-            <span><b>Paperwork included</b>Certificates, MSDS and calibration records ship with every order.</span>
+            <span><b>Concept to completion</b>Design, manufacture, supply and installation handled by a single team.</span>
           </li>
         </ul>
 
@@ -2366,9 +3016,12 @@ body.modal-open{overflow:hidden;}
               <select id="qType" name="businessType">
                 <option>Restaurant</option>
                 <option>Hotel</option>
+                <option>Caf&eacute;</option>
+                <option>Bakery</option>
                 <option>Catering company</option>
-                <option>Hospital kitchen</option>
-                <option>School canteen</option>
+                <option>Hospital</option>
+                <option>Institution</option>
+                <option>Food production facility</option>
                 <option>Other</option>
               </select>
             </p>
@@ -2381,6 +3034,7 @@ body.modal-open{overflow:hidden;}
                 <option>Sinks &amp; Tabling</option>
                 <option>Display Counters</option>
                 <option>Ventilation</option>
+                <option>Refrigeration</option>
                 <option>Other equipment</option>
               </select>
             </p>
@@ -2394,7 +3048,7 @@ body.modal-open{overflow:hidden;}
             </p>
             <p class="field field--wide">
               <label for="qMessage">What do you need? <span class="req" aria-hidden="true">*</span></label>
-              <textarea id="qMessage" name="message" rows="4" aria-required="true" aria-describedby="qMessage-err" placeholder="Tell us the products, volumes or the audit finding you are trying to close out."></textarea>
+              <textarea id="qMessage" name="message" rows="4" aria-required="true" aria-describedby="qMessage-err" placeholder="Tell us about your project &ndash; the equipment you need, the space you are fitting out, or the kitchen you are planning."></textarea>
               <span class="field-msg" id="qMessage-err"></span>
             </p>
           </div>
@@ -2407,7 +3061,7 @@ body.modal-open{overflow:hidden;}
         <div class="quote-success" id="quoteSuccess" role="status" hidden>
           <span class="qs-ico" aria-hidden="true">&#10003;</span>
           <h3>Request received</h3>
-          <p>Thank you <b id="qsName"></b>. Your reference is <b id="qsRef"></b> &mdash; our team will come back to you within one business day with pricing and the matching certification paperwork.</p>
+          <p>Thank you <b id="qsName"></b>. Your reference is <b id="qsRef"></b> &mdash; our team will come back to you within one business day with pricing and the next steps for your project.</p>
           <button type="button" class="btn btn--green btn--sm" id="qsAgain">Send another request</button>
         </div>
       </div>
@@ -2428,7 +3082,7 @@ body.modal-open{overflow:hidden;}
           <img class="brand-mark" src="assets/layaan-emblem.jpg" alt="" width="680" height="498" loading="lazy" decoding="async">
           <span>Layaan Kitchen Masters</span>
         </a>
-        <p>Compliance-grade equipment and supplies for commercial kitchens across Sri Lanka. Certified products, documented every step.</p>
+        <p>Complete commercial kitchen solutions for businesses across Sri Lanka and international markets. We design, manufacture, supply and install.</p>
         <div class="socials" aria-label="Social media links">
           <a href="#home" aria-label="Layaan Kitchen Masters on Facebook">Fb</a>
           <a href="#home" aria-label="Layaan Kitchen Masters on LinkedIn">In</a>
@@ -2445,6 +3099,7 @@ body.modal-open{overflow:hidden;}
           <li><a href="#about"><span class="mini-dot" aria-hidden="true"></span> About Us</a></li>
           <li><a href="#profile"><span class="mini-dot" aria-hidden="true"></span> Company Profile</a></li>
           <li><a href="#products"><span class="mini-dot" aria-hidden="true"></span> Products</a></li>
+          <li><a href="#process"><span class="mini-dot" aria-hidden="true"></span> Our Process</a></li>
           <li><a href="#quote"><span class="mini-dot" aria-hidden="true"></span> Request a Quote</a></li>
         </ul>
       </div>
@@ -2457,6 +3112,7 @@ body.modal-open{overflow:hidden;}
           <li><a href="#products" data-jump="sinks">Sinks &amp; Tabling</a></li>
           <li><a href="#products" data-jump="display">Display Counters</a></li>
           <li><a href="#products" data-jump="ventilation">Ventilation</a></li>
+          <li><a href="#products" data-jump="refrigeration">Refrigeration</a></li>
         </ul>
       </div>
 
@@ -2476,7 +3132,7 @@ body.modal-open{overflow:hidden;}
 
     <div class="footer-bottom">
       <span>&copy; 2026 Layaan Kitchen Masters. All rights reserved.</span>
-      <span class="accent">Designed for commercial kitchen excellence.</span>
+      <span class="accent">Design &middot; Manufacture &middot; Supply &middot; Install</span>
       <span class="footer-credit">Designed &amp; developed by <strong>TRISH (PVT) LTD</strong></span>
     </div>
   </div>
@@ -3326,6 +3982,85 @@ body.modal-open{overflow:hidden;}
       }, reduced() ? 0 : 600);
     });
   });
+
+  /* ---------------- 12. Process timeline: a rail that draws on scroll ------
+     The rail runs from the centre of the first number to the centre of the
+     last, fills to wherever the reading line sits on screen, and lights each
+     step as the fill head passes it. The markup reads as a plain numbered
+     list on its own - the entrance animation is only armed once this runs,
+     so a blocked script can never leave the steps invisible.                */
+  (function initProcessTimeline() {
+    var wrap = document.getElementById('processTimeline');
+    if (!wrap) { return; }
+
+    var track = wrap.querySelector('.pt-track');
+    var fill = wrap.querySelector('.pt-fill');
+    var steps = Array.prototype.slice.call(wrap.querySelectorAll('.process-step'));
+    if (!track || !fill || !steps.length) { return; }
+
+    var dots = steps.map(function (step) { return step.querySelector('.ps-num'); });
+    if (dots.indexOf(null) > -1) { return; }
+
+    wrap.classList.add('pt-ready');
+
+    var railTopOffset = 0;   // from the top of the wrapper to the first dot centre
+    var railHeight = 1;      // first dot centre to last dot centre
+
+    function measure() {
+      var wrapTop = wrap.getBoundingClientRect().top;
+      var first = dots[0].getBoundingClientRect();
+      var last = dots[dots.length - 1].getBoundingClientRect();
+      railTopOffset = (first.top - wrapTop) + first.height / 2;
+      railHeight = Math.max(1, (last.top - wrapTop) + last.height / 2 - railTopOffset);
+      track.style.top = railTopOffset + 'px';
+      track.style.bottom = 'auto';
+      track.style.height = railHeight + 'px';
+    }
+
+    function lightAll() {
+      fill.style.height = '100%';
+      track.classList.remove('is-live');
+      steps.forEach(function (step) { step.classList.add('is-active'); });
+    }
+
+    function paint() {
+      if (reduced()) { lightAll(); return; }
+
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      var railTop = wrap.getBoundingClientRect().top + railTopOffset;
+      var readLine = vh * 0.66;
+      var ratio = (readLine - railTop) / railHeight;
+      ratio = Math.max(0, Math.min(1, ratio));
+
+      fill.style.height = (ratio * 100) + '%';
+      track.classList.toggle('is-live', ratio > 0.004 && ratio < 0.996);
+
+      var headY = railTop + railHeight * ratio;
+      steps.forEach(function (step, i) {
+        var dot = dots[i].getBoundingClientRect();
+        step.classList.toggle('is-active', headY >= dot.top + dot.height / 2 - 2);
+      });
+    }
+
+    var ticking = false;
+    function onScroll() {
+      if (ticking) { return; }
+      ticking = true;
+      window.requestAnimationFrame(function () { paint(); ticking = false; });
+    }
+
+    function remeasure() { measure(); paint(); }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', remeasure, { passive: true });
+    window.addEventListener('load', remeasure);
+    if (typeof motionQuery.addEventListener === 'function') {
+      motionQuery.addEventListener('change', remeasure);
+    }
+    // Card widths settle after the webfonts land, which moves the dot centres.
+    if ('ResizeObserver' in window) { new ResizeObserver(remeasure).observe(wrap); }
+    remeasure();
+  })();
 
   /* ---------------- 11. Business locations --------------------------------
      >>> REPLACE THE PLACEHOLDER DETAILS BELOW <<<
