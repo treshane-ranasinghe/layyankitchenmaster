@@ -838,7 +838,9 @@ h2{letter-spacing:-.025em;}
    drops the two touches built for the emoji tiles: the frosted disc behind the
    glyph and the dark scrim along the bottom edge. */
 .p-media--photo{background:#fff;}
-.p-media--photo .p-media-inner{display:block;padding:.55rem;}
+/* Top padding clears a strip for the item-code badge so it never sits on
+   the product itself. */
+.p-media--photo .p-media-inner{display:block;padding:3.2rem .75rem .75rem;}
 .p-media--photo .p-media-inner::before{display:none;}
 .p-media--photo::after{background:none;box-shadow:inset 0 0 0 1px rgba(26,26,46,.1);}
 .g1{background:var(--grad-a);}
@@ -1283,9 +1285,8 @@ html{scrollbar-width:thin;scrollbar-color:rgba(255,213,30,.5) rgba(11,7,38,.14);
 .pm-media .p-media-inner{font-size:clamp(3.4rem,6vw,4.8rem);}
 .pm-media .p-badge{top:1rem;left:1rem;}
 .pm-media--photo{background:#fff;}
-.pm-media--photo .p-media-inner{display:block;padding:1rem;}
+.pm-media--photo .p-media-inner{display:block;padding:3.8rem 1rem 1rem;}
 .pm-media--photo .p-media-inner::before{display:none;}
-.pm-media--photo .p-media-inner{padding:1rem;}
 .pm-thumbs{
   display:flex;gap:.5rem;padding:.6rem;background:#fff;
   border-top:1px solid var(--hairline-light);
