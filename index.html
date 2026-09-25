@@ -280,7 +280,6 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 12px);}
 .hero-photo{
   position:absolute;inset:0;z-index:-5;width:100%;height:100%;
   object-fit:cover;object-position:center 56%;
-  filter:brightness(.74);
   transform:scale(1.04);
   animation:heroKen 30s ease-in-out infinite alternate;
   will-change:transform;
@@ -291,7 +290,6 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 12px);}
 .hero-slide{
   position:absolute;inset:0;z-index:-4;width:100%;height:100%;
   object-fit:cover;object-position:center 50%;
-  filter:brightness(.74);
   opacity:0;transition:opacity .8s var(--ease);
   pointer-events:none;
 }
@@ -308,12 +306,14 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 12px);}
   animation:heroShift 34s ease-in-out infinite;
   mix-blend-mode:soft-light;opacity:0;
 }
-/* Layer 3 - legibility scrim, heaviest where the copy sits */
+/* Layer 3 - legibility scrim. Kept to the band behind the copy so the right
+   half of each photo shows at full brightness; the text carries its own
+   shadow for the rest. */
 .hero::after{
   content:"";position:absolute;inset:0;z-index:-1;
   background:
-    linear-gradient(100deg,rgba(var(--hero-scrim),.92) 0%,rgba(var(--hero-scrim),.68) 34%,rgba(var(--hero-scrim),.2) 64%,rgba(var(--hero-scrim),.12) 100%),
-    linear-gradient(180deg,rgba(var(--hero-scrim),.55) 0%,transparent 26%,transparent 60%,rgba(var(--hero-scrim),.94) 100%);
+    linear-gradient(100deg,rgba(var(--hero-scrim),.72) 0%,rgba(var(--hero-scrim),.45) 32%,rgba(var(--hero-scrim),0) 58%),
+    linear-gradient(180deg,rgba(var(--hero-scrim),.4) 0%,transparent 20%,transparent 72%,rgba(var(--hero-scrim),.55) 100%);
 }
 @keyframes heroShift{
   0%{background-position:0% 50%;}
@@ -334,7 +334,7 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 12px);}
 .hero-badge .dot{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(255,213,30,.28);animation:pulseDot 2.4s ease-in-out infinite;}
 @keyframes pulseDot{0%,100%{box-shadow:0 0 0 4px rgba(255,213,30,.28);}50%{box-shadow:0 0 0 9px rgba(255,213,30,0);}}
 
-.hero h1{font-size:clamp(2.25rem,1.2rem + 3.9vw,4.1rem);margin-bottom:1.15rem;text-shadow:0 2px 30px rgba(11,7,38,.45);}
+.hero h1{font-size:clamp(2.25rem,1.2rem + 3.9vw,4.1rem);margin-bottom:1.15rem;text-shadow:0 2px 24px rgba(0,0,0,.6);}
 .hero h1 .line{display:block;overflow:hidden;}
 .hero h1 .line > span{
   display:block;
@@ -349,11 +349,12 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 12px);}
 .hero h1 em{font-style:normal;background:linear-gradient(100deg,var(--gold),var(--yellow) 45%,var(--lime));-webkit-background-clip:text;background-clip:text;color:transparent;}
 
 .hero-sub{
-  font-size:clamp(1.02rem,.96rem + .42vw,1.25rem);color:rgba(255,255,255,.88);
+  font-size:clamp(1.02rem,.96rem + .42vw,1.25rem);color:rgba(255,255,255,.92);
+  text-shadow:0 1px 12px rgba(0,0,0,.55);
   max-width:34em;margin-bottom:2.1rem;
   opacity:0;transform:translateY(20px);animation:fadeUp .9s var(--ease) .72s forwards;
 }
-.hero-actions{display:flex;flex-wrap:wrap;gap:1rem;opacity:0;transform:translateY(20px);animation:fadeUp .9s var(--ease) .88s forwards;}
+.hero-actions{display:flex;flex-wrap:wrap;gap:1rem;margin-top:clamp(1.25rem,2.5vh,2rem);opacity:0;transform:translateY(20px);animation:fadeUp .9s var(--ease) .88s forwards;}
 .hero-meta{
   display:flex;flex-wrap:wrap;gap:1.6rem 2.4rem;margin-top:2.8rem;
   padding-top:2rem;border-top:1px solid rgba(255,255,255,.18);
@@ -361,7 +362,72 @@ section[id]{scroll-margin-top:calc(var(--nav-h) + 12px);}
 }
 .hero-meta b{display:block;font-family:'Space Grotesk',system-ui,sans-serif;font-weight:700;font-size:1.6rem;color:var(--yellow);line-height:1.2;}
 .hero-meta span{font-size:.84rem;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.7);}
+/* Each stat centres its figure over its label. The figures differ in size
+   (12+ vs the words), so the row aligns on their baseline and the labels
+   underneath share one line. */
+.hero-meta{align-items:baseline;}
+.hero-meta > div{display:flex;flex-direction:column;align-items:center;text-align:center;}
+.hero-meta b{line-height:1;margin-bottom:.4rem;}
 @keyframes fadeUp{to{opacity:1;transform:translateY(0);}}
+/* Two square photo cards on the right, one overlapping the other. Desktop
+   only - below 1200px the copy is centred and takes the full width.
+   Motion is layered on separate properties so it composes: the entrance
+   animates translate/rotate/scale, the idle float animates transform, and
+   the photo inside slowly zooms. */
+.hero-inner{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:clamp(2rem,4vw,4rem);}
+.hero-gallery{position:relative;width:clamp(330px,31vw,460px);aspect-ratio:1/1.1;}
+.hg-card{
+  position:absolute;margin:0;aspect-ratio:1;overflow:hidden;
+  border-radius:20px;border:4px solid rgba(255,255,255,.92);
+  box-shadow:0 28px 60px -14px rgba(0,0,0,.6);
+  opacity:0;
+  transition:box-shadow .5s var(--ease),border-color .5s var(--ease);
+}
+.hg-card img{
+  display:block;width:100%;height:100%;object-fit:cover;
+  animation:hgZoom 18s ease-in-out infinite alternate;
+  transition:scale .7s var(--ease);
+}
+/* A light sweep that crosses each card every few seconds */
+.hg-card::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.35) 50%,transparent 65%);
+  translate:-120% 0;animation:hgSheen 7s ease-in-out 2.6s infinite;
+}
+.hg-card--a{
+  top:0;right:0;width:76%;
+  animation:hgInRight 1.1s var(--ease) 1s forwards,hgFloat 7s ease-in-out 2.1s infinite;
+}
+.hg-card--b{
+  bottom:0;left:0;width:58%;z-index:1;
+  animation:hgInUp 1.1s var(--ease) 1.3s forwards,hgFloat 6s ease-in-out 2.4s infinite reverse;
+}
+.hg-card--b::after{animation-delay:3.4s;}
+.hg-card:hover{z-index:2;border-color:var(--yellow);box-shadow:0 36px 70px -14px rgba(0,0,0,.7);}
+.hg-card:hover img{scale:1.08;}
+/* Gold outline square behind the cards, slowly turning */
+.hg-accent{
+  position:absolute;right:-3%;bottom:4%;width:28%;aspect-ratio:1;z-index:-1;
+  border:2px solid var(--yellow);border-radius:14px;opacity:0;
+  animation:hgFade .9s ease 1.7s forwards,hgSpin 26s linear 1.7s infinite;
+}
+/* Dot grid peeking out top-left */
+.hg-dots{
+  position:absolute;left:4%;top:4%;width:30%;aspect-ratio:1;z-index:-1;opacity:0;
+  background:radial-gradient(rgba(255,255,255,.55) 1.5px,transparent 1.6px) 0 0/16px 16px;
+  animation:hgFade .9s ease 1.9s forwards,hgFloat 9s ease-in-out 2.8s infinite;
+}
+@keyframes hgInRight{from{opacity:0;translate:60px 0;rotate:6deg;}to{opacity:1;translate:0 0;rotate:0deg;}}
+@keyframes hgInUp{from{opacity:0;translate:0 50px;scale:.85;rotate:-5deg;}to{opacity:1;translate:0 0;scale:1;rotate:0deg;}}
+@keyframes hgFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+@keyframes hgZoom{from{transform:scale(1);}to{transform:scale(1.12);}}
+@keyframes hgSheen{0%{translate:-120% 0;}35%,100%{translate:120% 0;}}
+@keyframes hgFade{to{opacity:.8;}}
+@keyframes hgSpin{to{rotate:360deg;}}
+@media (max-width:1199px){
+  .hero-inner{display:block;}
+  .hero-gallery{display:none;}
+}
 
 /* Features grid */
 .grid-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(1.1rem,1.8vw,1.75rem);}
@@ -897,6 +963,9 @@ h2{letter-spacing:-.025em;}
   .hero-sub{margin-inline:auto;}
   .hero-actions,.hero-meta{justify-content:center;}
   .hero-badge{margin-inline:auto;}
+  .hero::after{background:
+    radial-gradient(ellipse at center,rgba(var(--hero-scrim),.5) 0%,rgba(var(--hero-scrim),.3) 70%),
+    linear-gradient(180deg,rgba(var(--hero-scrim),.4) 0%,transparent 22%,transparent 75%,rgba(var(--hero-scrim),.5) 100%);}
   .grid-4{grid-template-columns:repeat(2,minmax(0,1fr));}
   .about-grid{grid-template-columns:1fr;}
   .media-frame{max-width:520px;margin-inline:auto;aspect-ratio:4/3;}
@@ -944,7 +1013,8 @@ h2{letter-spacing:-.025em;}
   .stat:nth-child(odd) + .stat::before{top:8%;bottom:8%;}
   .stat:nth-child(odd)::before{display:none;}
   .hero{min-height:auto;padding-top:calc(var(--chrome-h) + clamp(1.5rem,5vh,2.5rem));}
-  .hero-meta{gap:1.25rem 1.75rem;}
+  .hero-meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem .75rem;}
+  .hero-meta span{font-size:.66rem;letter-spacing:.1em;line-height:1.4;}
   .hero-meta b{font-size:1.35rem;}
   .hero-actions .btn{width:100%;}
   .section-head{text-align:center;margin-inline:auto;}
@@ -1111,7 +1181,9 @@ body.is-loading{overflow:hidden;}
 body.is-loading .hero h1 .line > span,
 body.is-loading .hero-sub,
 body.is-loading .hero-actions,
-body.is-loading .hero-meta{animation-play-state:paused;}
+body.is-loading .hero-meta,
+body.is-loading .hero-gallery *,
+body.is-loading .hero-gallery *::after{animation-play-state:paused;}
 
 /* --- Reading progress along the very top edge --- */
 .scroll-progress{
@@ -1538,6 +1610,10 @@ body.modal-open{overflow:hidden;}
   .reveal{opacity:1 !important;transform:none !important;}
   .hero h1 .line > span{clip-path:none !important;transform:none !important;}
   .hero-sub,.hero-actions,.hero-meta{opacity:1 !important;transform:none !important;}
+  .hero-gallery *,.hero-gallery *::after{animation:none !important;}
+  .hg-card{opacity:1 !important;}
+  .hg-accent,.hg-dots{opacity:.8 !important;}
+  .hg-card::after{display:none;}
   .hero-photo{animation:none !important;transform:scale(1.04) !important;}
   .pre-mark img{opacity:1 !important;transform:none !important;}
   .pre-mark::after,.pre-bar,.pre-pct{opacity:1 !important;}
@@ -1687,7 +1763,6 @@ body.modal-open{overflow:hidden;}
           <span class="line"><span><em>Better</em> Commercial</span></span>
           <span class="line"><span>Kitchens</span></span>
         </h1>
-        <p class="hero-sub">From concept to completion, we design, manufacture, supply and install complete commercial kitchen solutions built around quality, efficiency, durability and professional performance.</p>
         <div class="hero-actions">
           <a href="#products" class="btn btn--green" aria-label="View our commercial kitchen products">View Our Products</a>
           <a href="#quote" class="btn btn--ghost" aria-label="Request a quote from Layaan Kitchen Masters">Get a Quote</a>
@@ -1697,6 +1772,18 @@ body.modal-open{overflow:hidden;}
           <div><b class="hm-word">Island-Wide</b><span>Client network</span></div>
           <div><b class="hm-word">International</b><span>Projects &amp; markets</span></div>
         </div>
+      </div>
+      <div class="hero-gallery">
+        <span class="hg-dots" aria-hidden="true"></span>
+        <span class="hg-accent" aria-hidden="true"></span>
+        <figure class="hg-card hg-card--a">
+          <img src="assets/6aa7803cdc84104527a68b4919ba8ae3.jpg" width="1200" height="734" decoding="async"
+               alt="Fitted commercial kitchen with stainless steel canopy, prep tables and cooking line">
+        </figure>
+        <figure class="hg-card hg-card--b">
+          <img src="assets/57db79686b0b7bf1f10b9bd784813816.jpg" width="1024" height="1024" decoding="async"
+               alt="Stainless steel cooking range, fryer and upright refrigerator">
+        </figure>
       </div>
     </div>
   </div>
