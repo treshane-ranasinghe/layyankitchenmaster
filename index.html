@@ -1169,6 +1169,44 @@ body.nav-open .whatsapp-float{opacity:0;pointer-events:none;}
   .whatsapp-float svg{width:28px;height:28px;}
   .whatsapp-float .wa-tip{display:none;}
 }
+/* Call button, stacked above the WhatsApp one. Same size and tooltip so the
+   pair reads as a set; gold rather than green so the two are told apart. */
+.call-float{
+  position:fixed;right:clamp(1rem,3vw,1.75rem);
+  bottom:calc(clamp(1rem,3vw,1.75rem) + 58px + .85rem);z-index:940;
+  width:58px;height:58px;border-radius:50%;display:grid;place-items:center;
+  background:var(--yellow);color:#1A1A2E;
+  box-shadow:0 10px 26px rgba(255,213,30,.35),0 2px 10px rgba(16,12,40,.18);
+  transition:transform .35s var(--ease),box-shadow .35s ease;
+}
+.call-float svg{width:32px;height:32px;fill:currentColor;animation:callRing 4s ease-in-out 3s infinite;}
+/* a short ring every few seconds */
+@keyframes callRing{
+  0%,12%,100%{transform:rotate(0);}
+  2%,6%,10%{transform:rotate(-14deg);}
+  4%,8%{transform:rotate(14deg);}
+}
+.call-float .wa-tip{
+  position:absolute;right:calc(100% + .7rem);white-space:nowrap;
+  background:var(--dark);color:#fff;font-size:.8rem;font-weight:500;
+  padding:.45rem .8rem;border-radius:var(--pill);
+  opacity:0;transform:translateX(6px);pointer-events:none;
+  transition:opacity .3s ease,transform .3s var(--ease);
+}
+body.nav-open .call-float{opacity:0;pointer-events:none;}
+@media (max-width:560px){
+  .call-float{width:52px;height:52px;bottom:calc(clamp(1rem,3vw,1.75rem) + 52px + .75rem);}
+  .call-float svg{width:28px;height:28px;}
+  .call-float .wa-tip{display:none;}
+}
+@media (hover:hover) and (pointer:fine){
+  .call-float:hover{transform:translateY(-4px) scale(1.06);box-shadow:0 16px 34px rgba(255,213,30,.5);}
+  .call-float:hover .wa-tip{opacity:1;transform:translateX(0);}
+}
+@media (prefers-reduced-motion:reduce){
+  .call-float svg{animation:none;}
+  .call-float:hover{transform:none;}
+}
 /* icon-based social chips sit alongside the lettered ones */
 .socials a svg{width:19px;height:19px;fill:currentColor;}
 .socials a.is-whatsapp:hover{background:#25D366;box-shadow:0 10px 22px rgba(37,211,102,.45);}
@@ -4198,6 +4236,13 @@ body.modal-open{overflow:hidden;}
     </div>
   </div>
 </div>
+
+<!-- ========================= FLOATING CALL BUTTON ========================= -->
+<a class="call-float" href="tel:+94777868805"
+   aria-label="Call Layaan Kitchen Masters on +94 77 786 8805">
+  <span class="wa-tip">Call +94 77 786 8805</span>
+  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.3 3.4h3.1l1.5 3.9-2 1.3a12.2 12.2 0 0 0 5.8 5.8l1.3-2 3.9 1.5v3.1a2 2 0 0 1-2.2 2A16.6 16.6 0 0 1 4.3 5.6a2 2 0 0 1 2-2.2z"/></svg>
+</a>
 
 <!-- ======================= FLOATING WHATSAPP BUTTON ======================= -->
 <a class="whatsapp-float" data-whatsapp href="#quote"
